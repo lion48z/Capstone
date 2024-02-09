@@ -19,10 +19,12 @@ app.use(compression());
 app.use(cookieParser());
 app.use(bodyParser.json());
 
-const PORT: number = parseInt(process.env.PORT || '6001', 10);
-const MONGO_DB: string = process.env.MONGO_URL || '';
+const PORT= process.env.PORT ? Number(process.env.PORT): 6001;
+const MONGO_USERNAME = process.env.MONGO_USERNAME || '';
+const MONGO_PASSWORD = process.env.MONGO_PASSWORD || '';
+const MONGO_URL = `mongodb+srv://${MONGO_USERNAME}:${MONGO_PASSWORD}@cluster0.5yfcerx.mongodb.net/?retryWrites=true&w=majority` 
 
-mongoose.connect(MONGO_DB)
+mongoose.connect(MONGO_URL)
   .then(() => {
     app.listen(PORT, () => console.log(`Server Port: ${PORT}`));
   })
