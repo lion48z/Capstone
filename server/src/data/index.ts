@@ -159,9 +159,9 @@ export const users = [
         [userIds[4], true],
       ]),
       comments: [
-        "I like potatoes",
-        "another random comment",
-        "yet another random comment",
+        "Cool shot",
+        "Auroras are amazing",
+        "Wow",
       ],
     },
     {
@@ -181,10 +181,10 @@ export const users = [
         [userIds[2], true],
       ]),
       comments: [
-        "one more random comment",
-        "and another random comment",
-        "no more random comments",
-        "I lied, one more random comment",
+        "when did you go",
+        "Been there it is cool",
+        "Great place ",
+        "Love the crew",
       ],
     },
     {
@@ -194,7 +194,7 @@ export const users = [
       lastName: "Welsh",
       location: "Salt Lake City, UT",
       description:
-        "This is the last really long random description. This one is longer than the previous one.",
+        "My last trip.",
       picturePath: "lantern.jpg",
       userPicturePath: "p5.jpg",
       likes: new Map([
@@ -204,11 +204,10 @@ export const users = [
         [userIds[5], true],
       ]),
       comments: [
-        "one more random comment",
-        "I lied, one more random comment",
-        "I lied again, one more random comment",
-        "Why am I doing this?",
-        "I'm bored",
+        "Love this",
+        "Beautiful",
+        "So jealous",
+       
       ],
     },
     {
@@ -227,12 +226,10 @@ export const users = [
         [userIds[3], true],
       ]),
       comments: [
-        "I lied again, one more random comment",
-        "Why am I doing this?",
-        "I'm bored",
-        "I'm still bored",
-        "All I want to do is play video games",
-        "I'm going to play video games",
+        "Seriously a breakfast post?!",
+        "Where are you?",
+        "Fasting?",
+       
       ],
     },
     {
@@ -252,11 +249,11 @@ export const users = [
         [userIds[7], true],
       ]),
       comments: [
-        "I lied again, one more random comment",
+        "Take a picture of the bean",
         "Why am I doing this?",
-        "Man I'm bored",
+        "Go to the zoo today",
         "What should I do?",
-        "I'm going to play video games",
+        
       ],
     },
     {
@@ -266,7 +263,7 @@ export const users = [
       lastName: "Aurora",
       location: "Washington, DC",
       description:
-        "For the last time, I'm going to play video games now. I'm tired of typing. I'm going to play video games now.",
+        "The hiker girl on another adventure.",
       picturePath: "copperharbor.jpg",
       userPicturePath: "p9.jpg",
       likes: new Map([
@@ -275,11 +272,10 @@ export const users = [
       ]),
   
       comments: [
-        "Can I play video games now?",
-        "No let's actually study",
-        "Never mind, I'm going to play video games",
-        "Stop it.",
-        "Michael, stop it.",
+        "Where is this?",
+        "I think I know",
+        "Yooper",
+       
       ],
     },
   ];
