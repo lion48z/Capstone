@@ -4,11 +4,12 @@ import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import compression from 'compression';
 import cors from 'cors';
-import mongoose from 'mongoose';
+import mongoose from 'mongoose'; //MongoDB
 import dotenv from 'dotenv';
-import multer from "multer";
-import helmet from "helmet";
-import morgan from "morgan";
+import multer from "multer"; //middleware for handling multipart/form-data.
+import helmet from "helmet"; //Helmet.js is an open source JavaScript library that helps you secure your Node.js application by setting several HTTP headers.
+import morgan from "morgan"; //HTTP request logger middleware for node.js
+//Named after Dexter, a show you should not watch until completion.
 import path from "path";
 import { fileURLToPath } from "url";
 import authRoutes from "./routes/auth";
