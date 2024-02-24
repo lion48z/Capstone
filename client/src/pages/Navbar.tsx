@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from 'react';
 import {
   Box,
   IconButton,
@@ -9,7 +9,7 @@ import {
   FormControl,
   useTheme,
   useMediaQuery,
-} from "@mui/material";
+} from '@mui/material';
 import {
   Search,
   Message,
@@ -19,18 +19,18 @@ import {
   Help,
   Menu,
   Close,
-} from "@mui/icons-material";
-import { useDispatch, useSelector } from "react-redux";
-import { setMode, setLogout } from "state";
-import { useNavigate } from "react-router-dom";
-import FlexBetween from "../components/FlexBetween";
+} from '@mui/icons-material';
+import { useDispatch, useSelector } from 'react-redux';
+import { setMode, setLogout } from 'state';
+import { useNavigate } from 'react-router-dom';
+import FlexBetween from '../components/FlexBetween';
 
-const Navbar = () => {
+const Navbar: React.FC = () => {
   const [isMobileMenuToggled, setIsMobileMenuToggled] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const user = useSelector((state) => state.user);
-  const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
+  const user: any = useSelector((state: any) => state.user);
+  const isNonMobileScreens = useMediaQuery('(min-width: 1000px)');
 
   const theme = useTheme();
   const neutralLight = theme.palette.neutral.light;
@@ -48,11 +48,11 @@ const Navbar = () => {
           fontWeight="bold"
           fontSize="clamp(1rem, 2rem, 2.25rem)"
           color="primary"
-          onClick={() => navigate("/home")}
+          onClick={() => navigate('/home')}
           sx={{
-            "&:hover": {
+            '&:hover': {
               color: primaryLight,
-              cursor: "pointer",
+              cursor: 'pointer',
             },
           }}
         >
@@ -77,28 +77,28 @@ const Navbar = () => {
       {isNonMobileScreens ? (
         <FlexBetween gap="2rem">
           <IconButton onClick={() => dispatch(setMode())}>
-            {theme.palette.mode === "dark" ? (
-              <DarkMode sx={{ fontSize: "25px" }} />
+            {theme.palette.mode === 'dark' ? (
+              <DarkMode sx={{ fontSize: '25px' }} />
             ) : (
-              <LightMode sx={{ color: dark, fontSize: "25px" }} />
+              <LightMode sx={{ color: dark, fontSize: '25px' }} />
             )}
           </IconButton>
-          <Message sx={{ fontSize: "25px" }} />
-          <Notifications sx={{ fontSize: "25px" }} />
-          <Help sx={{ fontSize: "25px" }} />
-          <FormControl variant="standard" value={fullName}>
+          <Message sx={{ fontSize: '25px' }} />
+          <Notifications sx={{ fontSize: '25px' }} />
+          <Help sx={{ fontSize: '25px' }} />
+          <FormControl variant="standard">
             <Select
               value={fullName}
               sx={{
                 backgroundColor: neutralLight,
-                width: "150px",
-                borderRadius: "0.25rem",
-                p: "0.25rem 1rem",
-                "& .MuiSvgIcon-root": {
-                  pr: "0.25rem",
-                  width: "3rem",
+                width: '150px',
+                borderRadius: '0.25rem',
+                p: '0.25rem 1rem',
+                '& .MuiSvgIcon-root': {
+                  pr: '0.25rem',
+                  width: '3rem',
                 },
-                "& .MuiSelect-select:focus": {
+                '& .MuiSelect-select:focus': {
                   backgroundColor: neutralLight,
                 },
               }}
@@ -121,16 +121,17 @@ const Navbar = () => {
 
       {/* MOBILE NAV */}
       {!isNonMobileScreens && isMobileMenuToggled && (
-        <Box
-          position="fixed"
-          right="0"
-          bottom="0"
-          height="100%"
-          zIndex="10"
-          maxWidth="500px"
-          minWidth="300px"
-          backgroundColor={background}
-        >
+       <Box
+       component="div"
+       position="fixed"
+       right="0"
+       bottom="0"
+       height="100%"
+       zIndex="10"
+       maxWidth="500px"
+       minWidth="300px"
+       style={{ backgroundColor: background }}
+     >
           {/* CLOSE ICON */}
           <Box display="flex" justifyContent="flex-end" p="1rem">
             <IconButton
@@ -150,30 +151,30 @@ const Navbar = () => {
           >
             <IconButton
               onClick={() => dispatch(setMode())}
-              sx={{ fontSize: "25px" }}
+              sx={{ fontSize: '25px' }}
             >
-              {theme.palette.mode === "dark" ? (
-                <DarkMode sx={{ fontSize: "25px" }} />
+              {theme.palette.mode === 'dark' ? (
+                <DarkMode sx={{ fontSize: '25px' }} />
               ) : (
-                <LightMode sx={{ color: dark, fontSize: "25px" }} />
+                <LightMode sx={{ color: dark, fontSize: '25px' }} />
               )}
             </IconButton>
-            <Message sx={{ fontSize: "25px" }} />
-            <Notifications sx={{ fontSize: "25px" }} />
-            <Help sx={{ fontSize: "25px" }} />
-            <FormControl variant="standard" value={fullName}>
+            <Message sx={{ fontSize: '25px' }} />
+            <Notifications sx={{ fontSize: '25px' }} />
+            <Help sx={{ fontSize: '25px' }} />
+            <FormControl variant="standard">
               <Select
                 value={fullName}
                 sx={{
                   backgroundColor: neutralLight,
-                  width: "150px",
-                  borderRadius: "0.25rem",
-                  p: "0.25rem 1rem",
-                  "& .MuiSvgIcon-root": {
-                    pr: "0.25rem",
-                    width: "3rem",
+                  width: '150px',
+                  borderRadius: '0.25rem',
+                  p: '0.25rem 1rem',
+                  '& .MuiSvgIcon-root': {
+                    pr: '0.25rem',
+                    width: '3rem',
                   },
-                  "& .MuiSelect-select:focus": {
+                  '& .MuiSelect-select:focus': {
                     backgroundColor: neutralLight,
                   },
                 }}
@@ -182,9 +183,7 @@ const Navbar = () => {
                 <MenuItem value={fullName}>
                   <Typography>{fullName}</Typography>
                 </MenuItem>
-                <MenuItem onClick={() => dispatch(setLogout())}>
-                  Log Out
-                </MenuItem>
+                <MenuItem onClick={() => dispatch(setLogout())}>Log Out</MenuItem>
               </Select>
             </FormControl>
           </FlexBetween>
@@ -195,3 +194,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
