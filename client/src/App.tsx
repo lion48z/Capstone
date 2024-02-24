@@ -1,7 +1,7 @@
 import { BrowserRouter, Navigate, Routes, Route } from "react-router-dom";
-import HomePage from "../pages/homepage";
-import LoginPage from "../pages/loginpage";
-import ProfilePage from "..pages/profilepage.tsx";
+import HomePage from "./pages/HomePage";
+import LoginPage from "./pages/LoginPage";
+import ProfilePage from "./pages/ProfilePage";
 import { useMemo } from "react";
 import { useSelector } from "react-redux";
 import { CssBaseline, ThemeProvider } from "@mui/material";

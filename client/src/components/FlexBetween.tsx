@@ -1,10 +1,17 @@
-import { Box } from "@mui/material";
-import { styled } from "@mui/system";
+import { Box, styled } from "@mui/material";
+import { CSSObject } from "@mui/system";
 
-const FlexBetween = styled(Box)({
-  display: "flex",
-  justifyContent: "space-between",
-  alignItems: "center",
-});
 
-export default FlexBetween;
+
+interface Props {
+    
+  }
+
+const FlexBetween = styled(Box)<Props>(({
+}) => ({
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+  }));
+  
+  export default FlexBetween;
