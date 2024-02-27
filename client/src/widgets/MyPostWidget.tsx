@@ -24,6 +24,7 @@ import {
   import { useState } from "react";
   import { useDispatch, useSelector } from "react-redux";
   import { setPosts } from "../state/state";
+  import { themeSettings } from "../theme"
   
   const MyPostWidget = ({ picturePath }) => {
     const dispatch = useDispatch();

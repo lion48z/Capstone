@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import {
   ChatBubbleOutlineOutlined,
   FavoriteBorderOutlined,
@@ -8,11 +9,22 @@ import { Box, Divider, IconButton, Typography, useTheme } from "@mui/material";
 import FlexBetween from "../components/FlexBetween";
 import Friend from "../components/Friend";
 import WidgetWrapper from "../components/WidgetWrapper";
-import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setPost } from "../state/state";
 
-const PostWidget = ({
+interface PostWidgetProps {
+  postId: string;
+  postUserId: string;
+  name: string;
+  description: string;
+  location?: string;
+  picturePath: string;
+  userPicturePath: string;
+  likes: Record<string, boolean>;
+  comments: string[];
+}
+
+const PostWidget: React.FC<PostWidgetProps> = ({
   postId,
   postUserId,
   name,
@@ -23,10 +35,10 @@ const PostWidget = ({
   likes,
   comments,
 }) => {
-  const [isComments, setIsComments] = useState(false);
+  const [isComments, setIsComments] = useState<boolean>(false);
   const dispatch = useDispatch();
-  const token = useSelector((state) => state.token);
-  const loggedInUserId = useSelector((state) => state.user._id);
+  const token = useSelector((state: any) => state.token); 
+  const loggedInUserId = useSelector((state: any) => state.user._id); 
   const isLiked = Boolean(likes[loggedInUserId]);
   const likeCount = Object.keys(likes).length;
 
@@ -110,3 +122,4 @@ const PostWidget = ({
 };
 
 export default PostWidget;
+
