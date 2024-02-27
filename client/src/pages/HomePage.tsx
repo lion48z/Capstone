@@ -1,14 +1,14 @@
-import React from 'react';
-import { Box, useMediaQuery } from '@mui/material';
-import { useSelector } from 'react-redux';
-import Navbar from '../pages/Navbar';
-import UserWidget from '../pages/widgets/UserWidget';
-import MyPostWidget from '../pages/widgets/MyPostWidget';
-import PostsWidget from '../pages/widgets/PostsWidget';
-import FriendListWidget from '../pages/widgets/FriendListWidget';
+import React from "react";
+import { Box, useMediaQuery } from "@mui/material";
+import { useSelector } from "react-redux";
+import Navbar from "../pages/Navbar";
+import UserWidget from "../widgets/UserWidget";
+import MyPostWidget from "../widgets/MyPostWidget";
+import PostsWidget from "../widgets/PostsWidget";
+import FriendListWidget from "../widgets/FriendListWidget";
 
 const HomePage: React.FC = () => {
-  const isNonMobileScreens = useMediaQuery('(min-width:1000px)');
+  const isNonMobileScreens = useMediaQuery("(min-width:1000px)");
   const { _id, picturePath } = useSelector((state: any) => state.user);
 
   return (
@@ -17,16 +17,16 @@ const HomePage: React.FC = () => {
       <Box
         width="100%"
         padding="2rem 6%"
-        display={isNonMobileScreens ? 'flex' : 'block'}
+        display={isNonMobileScreens ? "flex" : "block"}
         gap="0.5rem"
         justifyContent="space-between"
       >
-        <Box flexBasis={isNonMobileScreens ? '26%' : undefined}>
+        <Box flexBasis={isNonMobileScreens ? "26%" : undefined}>
           <UserWidget userId={_id} picturePath={picturePath} />
         </Box>
         <Box
-          flexBasis={isNonMobileScreens ? '42%' : undefined}
-          mt={isNonMobileScreens ? undefined : '2rem'}
+          flexBasis={isNonMobileScreens ? "42%" : undefined}
+          mt={isNonMobileScreens ? undefined : "2rem"}
         >
           <MyPostWidget picturePath={picturePath} />
           <PostsWidget userId={_id} />
@@ -43,4 +43,3 @@ const HomePage: React.FC = () => {
 };
 
 export default HomePage;
-

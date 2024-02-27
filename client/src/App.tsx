@@ -1,17 +1,24 @@
+import React, { useMemo } from "react";
 import { BrowserRouter, Navigate, Routes, Route } from "react-router-dom";
-import HomePage from "./pages/HomePage";
-import LoginPage from "./pages/LoginPage";
-import ProfilePage from "./pages/ProfilePage";
-import { useMemo } from "react";
 import { useSelector } from "react-redux";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { createTheme } from "@mui/material/styles";
 import { themeSettings } from "./theme";
+import HomePage from "./pages/HomePage";
+import LoginPage from "./pages/LoginPage";
+import ProfilePage from "./pages/ProfilePage";
+
+interface RootState {
+  mode: string; 
+  token: string | null; 
+}
 
 function App() {
-  const mode = useSelector((state) => state.mode);
-  const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
-  const isAuth = Boolean(useSelector((state) => state.token));
+  const mode = useSelector((state: RootState) => state.mode);
+  const theme = useMemo(() => createTheme(themeSettings(mode as string)), [mode]);
+
+
+  const isAuth = Boolean(useSelector((state: RootState) => state.token));
 
   return (
     <div className="app">
@@ -36,3 +43,4 @@ function App() {
 }
 
 export default App;
+
