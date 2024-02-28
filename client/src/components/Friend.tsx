@@ -1,23 +1,30 @@
+import { FC } from "react";
 import { PersonAddOutlined, PersonRemoveOutlined } from "@mui/icons-material";
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { setFriends } from "/state/index";
+import { setFriends } from "../state/state";
 import FlexBetween from "./FlexBetween";
 import UserImage from "./UserImage";
+import { RootState } from "../app/store";
 
-const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
+interface FriendProps {
+  friendId: string;
+  name: string;
+  subtitle: string;
+  userPicturePath: string;
+}
+
+const Friend: FC<FriendProps> = ({ friendId, name, subtitle, userPicturePath }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { _id } = useSelector((state) => state.user);
-  const token = useSelector((state) => state.token);
-  const friends = useSelector((state) => state.user.friends);
+  const { _id } = useSelector((state: RootState) => state.user);
+  const token = useSelector((state: RootState) => state.token);
+  const friends = useSelector((state: RootState) => state.user.friends);
 
   const { palette } = useTheme();
-  const primaryLight = palette.primary.light;
-  const primaryDark = palette.primary.dark;
-  const main = palette.neutral.main;
-  const medium = palette.neutral.medium;
+  const { light: primaryLight, dark: primaryDark } = palette.primary;
+  const { main, medium } = palette.neutral;
 
   const isFriend = friends.find((friend) => friend._id === friendId);
 
@@ -52,7 +59,7 @@ const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
             fontWeight="500"
             sx={{
               "&:hover": {
-                color: palette.primary.light,
+                color: primaryLight,
                 cursor: "pointer",
               },
             }}

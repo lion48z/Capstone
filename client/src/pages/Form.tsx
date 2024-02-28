@@ -8,13 +8,23 @@ import {
   useTheme,
 } from "@mui/material";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
-import { Formik } from "formik";
+import { Formik, FormikHelpers } from "formik";
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { setLogin } from "state";
+import { setLogin } from "../state/state";
 import Dropzone from "react-dropzone";
 import FlexBetween from "../components/FlexBetween";
+
+interface Values {
+  firstName?: string;
+  lastName?: string;
+  email: string;
+  password: string;
+  location?: string;
+  occupation?: string;
+  picture?: File;
+}
 
 const registerSchema = yup.object().shape({
   firstName: yup.string().required("required"),
@@ -31,23 +41,23 @@ const loginSchema = yup.object().shape({
   password: yup.string().required("required"),
 });
 
-const initialValuesRegister = {
+const initialValuesRegister: Values = {
   firstName: "",
   lastName: "",
   email: "",
   password: "",
   location: "",
   occupation: "",
-  picture: "",
+  picture: undefined,
 };
 
-const initialValuesLogin = {
+const initialValuesLogin: Values = {
   email: "",
   password: "",
 };
 
 const Form = () => {
-  const [pageType, setPageType] = useState("login");
+  const [pageType, setPageType] = useState<"login" | "register">("login");
   const { palette } = useTheme();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -55,21 +65,24 @@ const Form = () => {
   const isLogin = pageType === "login";
   const isRegister = pageType === "register";
 
-  const register = async (values, onSubmitProps) => {
-    // this allows us to send form info with image
+  const register = async (values: Values, onSubmitProps: FormikHelpers<Values>) => {
     const formData = new FormData();
-    for (let value in values) {
-      formData.append(value, values[value]);
-    }
-    formData.append("picturePath", values.picture.name);
-
-    const savedUserResponse = await fetch(
-      "http://localhost:3001/auth/register",
-      {
-        method: "POST",
-        body: formData,
+    for (const value in values) {
+      const key = value as keyof Values;
+      const data = values[key];
+      if (data !== undefined && data instanceof Blob) {
+        formData.append(key, data);
       }
-    );
+    }
+    
+    if (values.picture) {
+      formData.append("picturePath", values.picture.name);
+    }
+
+    const savedUserResponse = await fetch("http://localhost:3001/auth/register", {
+      method: "POST",
+      body: formData,
+    });
     const savedUser = await savedUserResponse.json();
     onSubmitProps.resetForm();
 
@@ -78,7 +91,7 @@ const Form = () => {
     }
   };
 
-  const login = async (values, onSubmitProps) => {
+  const login = async (values: Values, onSubmitProps: FormikHelpers<Values>) => {
     const loggedInResponse = await fetch("http://localhost:3001/auth/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -97,7 +110,7 @@ const Form = () => {
     }
   };
 
-  const handleFormSubmit = async (values, onSubmitProps) => {
+  const handleFormSubmit = async (values: Values, onSubmitProps: FormikHelpers<Values>) => {
     if (isLogin) await login(values, onSubmitProps);
     if (isRegister) await register(values, onSubmitProps);
   };
@@ -179,13 +192,12 @@ const Form = () => {
                   borderRadius="5px"
                   p="1rem"
                 >
-                  <Dropzone
-                    acceptedFiles=".jpg,.jpeg,.png"
-                    multiple={false}
-                    onDrop={(acceptedFiles) =>
-                      setFieldValue("picture", acceptedFiles[0])
-                    }
-                  >
+               <Dropzone
+                      onDrop={async (acceptedFiles: File[]) => {
+                        setFieldValue("picture", acceptedFiles[0]);
+                      }}
+                      multiple={false}
+                    >
                     {({ getRootProps, getInputProps }) => (
                       <Box
                         {...getRootProps()}

@@ -1,3 +1,5 @@
+import { PaletteMode } from "@mui/material";
+
 export const colorTokens: Record<string, Record<number, string>> = {
   grey: {
     0: "#FFFFFF",
@@ -28,14 +30,62 @@ export const colorTokens: Record<string, Record<number, string>> = {
   },
 };
 
-// mui theme settings
-export const themeSettings = (mode: string) => {
+interface ThemeSettingsOptions {
+  palette: {
+    mode: PaletteMode;
+    primary: {
+      dark: string;
+      main: string;
+      light: string;
+    };
+    neutral: {
+      dark: string;
+      main: string;
+      mediumMain: string;
+      medium: string;
+      light: string;
+    };
+    background: {
+      default: string;
+      alt: string;
+    };
+  };
+  typography: {
+    fontFamily: string;
+    fontSize: number;
+    h1: {
+      fontFamily: string;
+      fontSize: number;
+    };
+    h2: {
+      fontFamily: string;
+      fontSize: number;
+    };
+    h3: {
+      fontFamily: string;
+      fontSize: number;
+    };
+    h4: {
+      fontFamily: string;
+      fontSize: number;
+    };
+    h5: {
+      fontFamily: string;
+      fontSize: number;
+    };
+    h6: {
+      fontFamily: string;
+      fontSize: number;
+    };
+  };
+}
+
+export const themeSettings = (mode: PaletteMode): ThemeSettingsOptions => {
   return {
     palette: {
       mode: mode,
       ...(mode === "dark"
         ? {
-            // palette values for dark mode
             primary: {
               dark: colorTokens.primary[200],
               main: colorTokens.primary[500],
@@ -54,7 +104,6 @@ export const themeSettings = (mode: string) => {
             },
           }
         : {
-            // palette values for light mode
             primary: {
               dark: colorTokens.primary[700],
               main: colorTokens.primary[500],
@@ -103,3 +152,4 @@ export const themeSettings = (mode: string) => {
     },
   };
 };
+

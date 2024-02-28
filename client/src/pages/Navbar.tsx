@@ -21,7 +21,7 @@ import {
   Close,
 } from '@mui/icons-material';
 import { useDispatch, useSelector } from 'react-redux';
-import { setMode, setLogout } from 'state';
+import { setMode, setLogout } from '../state/state';
 import { useNavigate } from 'react-router-dom';
 import FlexBetween from '../components/FlexBetween';
 
@@ -42,7 +42,7 @@ const Navbar: React.FC = () => {
   const fullName = `${user.firstName} ${user.lastName}`;
 
   return (
-    <FlexBetween padding="1rem 6%" backgroundColor={alt}>
+    <FlexBetween padding="1rem 6%" /*backgroundColor={alt}*/>
       <FlexBetween gap="1.75rem">
         <Typography
           fontWeight="bold"
@@ -60,7 +60,7 @@ const Navbar: React.FC = () => {
         </Typography>
         {isNonMobileScreens && (
           <FlexBetween
-            backgroundColor={neutralLight}
+            //backgroundColor={neutralLight}
             borderRadius="9px"
             gap="3rem"
             padding="0.1rem 1.5rem"

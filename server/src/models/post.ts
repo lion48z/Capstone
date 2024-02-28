@@ -5,7 +5,7 @@ interface IPost extends Document {
     lastName: string;
     picturePath: string;
     userPicturePath: string;
-    friends: string[];
+    friends?: string[];
     description?:string;
     location?: string;                 //? to show that these can be undefined or have a value
     occupation?: string;

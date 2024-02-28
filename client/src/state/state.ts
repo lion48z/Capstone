@@ -6,7 +6,7 @@ interface IUser {
   email: string;
   password: string;
   picturePath: string;
-  friends: string[];
+  friends?: string[];
   location?: string;                 //? to show that these can be undefined or have a value
   occupation?: string;
   viewedProfile?: number;
@@ -19,13 +19,13 @@ interface IPost {
   lastName: string;
   picturePath: string;
   userPicturePath: string;
-  friends: string[];
+  friends?: string[];
   description?:string;
   location?: string;                 //? to show that these can be undefined or have a value
   occupation?: string;
   viewedProfile?: number;
   impressions?: number;
-  likes: Map<string, boolean>;
+  likes?: Map<string, boolean>;
   comments?: string[];
 }
 
