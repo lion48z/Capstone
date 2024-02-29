@@ -30,26 +30,28 @@ export const colorTokens: Record<string, Record<number, string>> = {
   },
 };
 
-interface ThemeSettingsOptions {
-  palette: {
-    mode: PaletteMode;
-    primary: {
-      dark: string;
-      main: string;
-      light: string;
-    };
-    neutral: {
-      dark: string;
-      main: string;
-      mediumMain: string;
-      medium: string;
-      light: string;
-    };
-    background: {
-      default: string;
-      alt: string;
-    };
+interface Palette {
+  mode: PaletteMode;
+  primary: {
+    dark: string;
+    main: string;
+    light: string;
   };
+  neutral: {
+    dark: string;
+    main: string;
+    mediumMain: string;
+    medium: string;
+    light: string;
+  };
+  background: {
+    default: string;
+    alt: string;
+  };
+}
+
+interface ThemeSettingsOptions {
+  palette: Palette;
   typography: {
     fontFamily: string;
     fontSize: number;
@@ -152,4 +154,5 @@ export const themeSettings = (mode: PaletteMode): ThemeSettingsOptions => {
     },
   };
 };
+
 

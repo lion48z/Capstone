@@ -7,11 +7,12 @@ import FriendListWidget from "../widgets/FriendListWidget";
 import MyPostWidget from "../widgets/MyPostWidget";
 import PostsWidget from "../widgets/PostsWidget";
 import UserWidget from "../widgets/UserWidget";
+import { RootState } from "../app/store"
 
 const ProfilePage = () => {
   const [user, setUser] = useState(null);
   const { userId } = useParams();
-  const token = useSelector((state) => state.token);
+  const token = useSelector((state: RootState) => state.token);
   const isNonMobileScreens = useMediaQuery("(min-width:1000px)");
 
   const getUser = async () => {
