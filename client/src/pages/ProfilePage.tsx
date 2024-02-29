@@ -10,8 +10,9 @@ import UserWidget from "../widgets/UserWidget";
 import { RootState } from "../app/store"
 
 const ProfilePage = () => {
-  const [user, setUser] = useState(null);
-  const { userId } = useParams();
+  //const [user, setUser] = useState(null);
+  //const { userId } = useParams();
+  const users = useSelector((state: RootState) => state.user);
   const token = useSelector((state: RootState) => state.token);
   const isNonMobileScreens = useMediaQuery("(min-width:1000px)");
 

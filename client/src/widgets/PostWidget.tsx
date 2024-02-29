@@ -16,12 +16,12 @@ interface PostWidgetProps {
   postId: string;
   postUserId: string;
   name: string;
-  description: string;
+  description?: string;
   location?: string;
   picturePath: string;
   userPicturePath: string;
   likes: Record<string, boolean>;
-  comments: string[];
+  comments?: string[];
 }
 
 const PostWidget: React.FC<PostWidgetProps> = ({
@@ -67,9 +67,11 @@ const PostWidget: React.FC<PostWidgetProps> = ({
         subtitle={location}
         userPicturePath={userPicturePath}
       />
-      <Typography color={main} sx={{ mt: "1rem" }}>
-        {description}
-      </Typography>
+      {description && (
+        <Typography color={main} sx={{ mt: "1rem" }}>
+          {description}
+        </Typography>
+      )}
       {picturePath && (
         <img
           width="100%"
@@ -96,7 +98,7 @@ const PostWidget: React.FC<PostWidgetProps> = ({
             <IconButton onClick={() => setIsComments(!isComments)}>
               <ChatBubbleOutlineOutlined />
             </IconButton>
-            <Typography>{comments.length}</Typography>
+            <Typography>{comments?.length}</Typography>
           </FlexBetween>
         </FlexBetween>
 
@@ -106,7 +108,7 @@ const PostWidget: React.FC<PostWidgetProps> = ({
       </FlexBetween>
       {isComments && (
         <Box mt="0.5rem">
-          {comments.map((comment, i) => (
+          {comments?.map((comment, i) => (
             <Box key={`${name}-${i}`}>
               <Divider />
               <Typography sx={{ color: main, m: "0.5rem 0", pl: "1rem" }}>

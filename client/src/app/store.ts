@@ -2,7 +2,8 @@ import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import counterReducer from '../features/counter/counterSlice';
 import userReducer from '../features/counter/userSlice'; 
 import  tokenReducer  from '../features/counter/tokenSlice';
-import friendReducer from '../features/counter/friendSlice'
+import friendReducer from '../features/counter/friendSlice';
+//import postReducer from '../features/counter/postSlice';
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
     user: userReducer,
     token: tokenReducer,
     friend: friendReducer,
+  
   },
 });
 

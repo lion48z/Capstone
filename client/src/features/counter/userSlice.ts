@@ -3,7 +3,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 interface UserState {
   _id: string;
   friends: string[];
-  userId: string;
+  userId?: string;
   picturePath?: string;
 }
 
@@ -12,7 +12,6 @@ const initialState: UserState = {
   friends: [],
   userId: '',
   picturePath: '',
-
 };
 
 const userSlice = createSlice({
@@ -28,10 +27,13 @@ const userSlice = createSlice({
     removeFriend: (state, action: PayloadAction<string>) => {
       state.friends = state.friends.filter(friendId => friendId !== action.payload);
     },
-    
+    setUserId: (state, action: PayloadAction<string>) => {
+      state.userId = action.payload;
+    },
   },
 });
 
-export const { setUser, addFriend, removeFriend } = userSlice.actions;
+export const { setUser, addFriend, removeFriend, setUserId } = userSlice.actions;
 
 export default userSlice.reducer;
+

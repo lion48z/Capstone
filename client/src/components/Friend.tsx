@@ -8,10 +8,11 @@ import FlexBetween from "./FlexBetween";
 import UserImage from "./UserImage";
 import { RootState } from "../app/store";
 
+
 interface FriendProps {
   friendId: string;
   name: string;
-  subtitle: string;
+  subtitle?: string;
   userPicturePath: string;
 }
 
@@ -20,11 +21,11 @@ const Friend: FC<FriendProps> = ({ friendId, name, subtitle, userPicturePath }) 
   const navigate = useNavigate();
   const { _id } = useSelector((state: RootState) => state.user);
   const token = useSelector((state: RootState) => state.token);
-  const friends = useSelector((state: RootState) => state.user.friends);
-
+  const friends = useSelector((state: RootState) => state.friend.friends);
+ 
   const { palette } = useTheme();
-  const { light: primaryLight, dark: primaryDark } = palette.text.primary;
-  const { main, medium } = palette.text.primary;
+  //const { light: primaryLight, dark: primaryDark } = palette.text.primary;
+  //const { main, medium } = palette.text.primary;
 
   const isFriend = friends.find((friend) => friend._id === friendId);
 
@@ -54,31 +55,31 @@ const Friend: FC<FriendProps> = ({ friendId, name, subtitle, userPicturePath }) 
           }}
         >
           <Typography
-            color={main}
+            color={palette.text.primary}
             variant="h5"
             fontWeight="500"
             sx={{
               "&:hover": {
-                color: primaryLight,
+                color: palette.text.primary,
                 cursor: "pointer",
               },
             }}
           >
             {name}
           </Typography>
-          <Typography color={medium} fontSize="0.75rem">
+          <Typography color={palette.text.secondary} fontSize="0.75rem">
             {subtitle}
           </Typography>
         </Box>
       </FlexBetween>
       <IconButton
         onClick={() => patchFriend()}
-        sx={{ backgroundColor: primaryLight, p: "0.6rem" }}
+        sx={{ backgroundColor: palette.text.primary, p: "0.6rem" }}
       >
         {isFriend ? (
-          <PersonRemoveOutlined sx={{ color: primaryDark }} />
+          <PersonRemoveOutlined sx={{ color:palette.text.disabled }} />
         ) : (
-          <PersonAddOutlined sx={{ color: primaryDark }} />
+          <PersonAddOutlined sx={{ color: palette.text.disabled }} />
         )}
       </IconButton>
     </FlexBetween>
