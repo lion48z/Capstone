@@ -1,6 +1,5 @@
-import { Box, Typography, useTheme } from "@mui/material";
-import { themeSettings } from "../theme"; 
-import Friend from "../components/Friend";
+import { Box, Typography, useTheme } from "@mui/material"; 
+import Friend from '../components/Friend';
 import WidgetWrapper from "../components/WidgetWrapper";
 import { useEffect } from "react";
 import { RootState } from "../app/store"; 
@@ -11,7 +10,7 @@ import { setFriends } from "../state/state";
 const FriendListWidget: React.FC<{ userId: string }> = ({ userId  }) => {
   const dispatch = useDispatch();
   const { palette } = useTheme();
-  const user = useSelector((state: RootState) => state.user);
+
   const token = useSelector((state: RootState) => state.token);
   const friends = useSelector((state: RootState) => state.friend.friends);
 
@@ -29,7 +28,7 @@ const FriendListWidget: React.FC<{ userId: string }> = ({ userId  }) => {
 
   useEffect(() => {
     getFriends();
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []); //eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <WidgetWrapper>

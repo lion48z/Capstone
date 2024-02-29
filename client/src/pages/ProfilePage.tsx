@@ -40,8 +40,8 @@ const ProfilePage = () => {
 
   useEffect(() => {
     getUser();
-  }, [userId, token]); // Update useEffect dependencies
-
+  }, [userId, token]); 
+  
   if (!user) return null;
 
   return (
