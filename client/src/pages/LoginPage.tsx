@@ -10,7 +10,7 @@ const LoginPage: React.FC = () => {
     <Box>
       <Box
         width="100%"
-        bgcolor={theme.palette.background.alt}
+        bgcolor={theme.palette.background.default}
         padding="1rem 6%"
         textAlign="center"
       >
@@ -24,7 +24,7 @@ const LoginPage: React.FC = () => {
         padding="2rem"
         margin="2rem auto"
         borderRadius="1.5rem"
-        bgcolor={theme.palette.background.alt}
+        bgcolor={theme.palette.background.default}
       >
         <Typography fontWeight="500" variant="h5" sx={{ mb: "1.5rem" }}>
           Welcome to Socipedia, the Social Media for Sociopaths!

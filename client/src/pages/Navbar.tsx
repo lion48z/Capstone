@@ -37,7 +37,7 @@ const Navbar: React.FC = () => {
   const dark = theme.palette.neutral.dark;
   const background = theme.palette.background.default;
   const primaryLight = theme.palette.primary.light;
-  const alt = theme.palette.background.alt;
+  const alt = theme.palette.background.default;
 
   const fullName = `${user.firstName} ${user.lastName}`;
 

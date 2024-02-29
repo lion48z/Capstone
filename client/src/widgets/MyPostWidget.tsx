@@ -77,11 +77,13 @@ const MyPostWidget: React.FC<{ picturePath: string }> = ({ picturePath }) => {
       </FlexBetween>
       {isImage && (
         <Box border={`1px solid ${medium}`} borderRadius="5px" mt="1rem" p="1rem">
-          <Dropzone
-            acceptedFiles=".jpg,.jpeg,.png"
-            multiple={false}
-            onDrop={(acceptedFiles) => setImage(acceptedFiles[0])}
-          >
+        
+            <Dropzone
+                      onDrop={async (acceptedFiles: File[]) => {
+                        setImage( acceptedFiles[0]);
+                      }}
+                      multiple={false}
+                    >
             {({ getRootProps, getInputProps }) => (
               <FlexBetween>
                 <Box
@@ -152,7 +154,7 @@ const MyPostWidget: React.FC<{ picturePath: string }> = ({ picturePath }) => {
           disabled={!post}
           onClick={handlePost}
           sx={{
-            color: palette.background.alt,
+            color: palette.background.default,
             backgroundColor: palette.primary.main,
             borderRadius: "3rem",
           }}
