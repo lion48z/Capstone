@@ -51,6 +51,13 @@ const PostsWidget: React.FC<PostsWidgetProps> = ({ userId, isProfile = false }) 
     const data: Post[] = await response.json();
     dispatch(setPosts({ posts: data }));
   };
+  const mapToRecord = (map: Map<string, boolean>): Record<string, boolean> => {
+    const obj: Record<string, boolean> = {};
+    map.forEach((value, key) => {
+      obj[key] = value;
+    });
+    return obj;
+  };
 
   useEffect(() => {
     if (isProfile) {
@@ -84,7 +91,7 @@ const PostsWidget: React.FC<PostsWidgetProps> = ({ userId, isProfile = false }) 
             location={location}
             picturePath={picturePath}
             userPicturePath={userPicturePath}
-            likes={likes}
+            likes={mapToRecord(likes)}
             comments={comments}
           />
         )
