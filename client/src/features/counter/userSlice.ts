@@ -4,7 +4,7 @@ interface UserState {
   _id: string;
   friends: string[];
   userId?: string;
-  picturePath?: string;
+  picturePath: string;
 }
 
 const initialState: UserState = {
