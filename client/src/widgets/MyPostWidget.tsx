@@ -36,8 +36,8 @@ const MyPostWidget: React.FC<{ picturePath: string }> = ({ picturePath }) => {
   const { _id } = useSelector((state: RootState) => state.user);
   const token = useSelector((state: RootState) => state.token);
   const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
-  const mediumMain = palette.neutral.mediumMain;
-  const medium = palette.neutral.medium;
+  const mediumMain = palette.text.disabled;
+  const medium = palette.text.secondary;
 
   const handlePost = async () => {
     const formData = new FormData();
@@ -69,7 +69,7 @@ const MyPostWidget: React.FC<{ picturePath: string }> = ({ picturePath }) => {
           value={post}
           sx={{
             width: "100%",
-            backgroundColor: palette.neutral.light,
+            backgroundColor: palette.text.secondary,
             borderRadius: "2rem",
             padding: "1rem 2rem",
           }}
@@ -88,7 +88,7 @@ const MyPostWidget: React.FC<{ picturePath: string }> = ({ picturePath }) => {
               <FlexBetween>
                 <Box
                   {...getRootProps()}
-                  border={`2px dashed ${palette.primary.main}`}
+                  border={`2px dashed ${palette.text.primary}`}
                   p="1rem"
                   width="100%"
                   sx={{ "&:hover": { cursor: "pointer" } }}

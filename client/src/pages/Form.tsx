@@ -188,7 +188,7 @@ const Form = () => {
                 />
                 <Box
                   gridColumn="span 4"
-                  border={`1px solid ${palette.neutral.medium}`}
+                  border={`1px solid ${palette.text.secondary}`}
                   borderRadius="5px"
                   p="1rem"
                 >
@@ -201,7 +201,7 @@ const Form = () => {
                     {({ getRootProps, getInputProps }) => (
                       <Box
                         {...getRootProps()}
-                        border={`2px dashed ${palette.primary.main}`}
+                        border={`2px dashed ${palette.text.primary}`}
                         p="1rem"
                         sx={{ "&:hover": { cursor: "pointer" } }}
                       >
@@ -252,9 +252,9 @@ const Form = () => {
               sx={{
                 m: "2rem 0",
                 p: "1rem",
-                backgroundColor: palette.primary.main,
-                color: palette.background.alt,
-                "&:hover": { color: palette.primary.main },
+                backgroundColor: palette.text.primary,
+                color: palette.background.default,
+                "&:hover": { color: palette.text.primary },
               }}
             >
               {isLogin ? "LOGIN" : "REGISTER"}
@@ -266,10 +266,10 @@ const Form = () => {
               }}
               sx={{
                 textDecoration: "underline",
-                color: palette.primary.main,
+                color: palette.text.primary,
                 "&:hover": {
                   cursor: "pointer",
-                  color: palette.primary.light,
+                  color: palette.text.secondary,
                 },
               }}
             >

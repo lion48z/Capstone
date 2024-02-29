@@ -3,11 +3,15 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 interface UserState {
   _id: string;
   friends: string[];
+  userId: string;
+  picturePath?: string;
 }
 
 const initialState: UserState = {
   _id: '',
   friends: [],
+  userId: '',
+  picturePath: '',
 
 };
 

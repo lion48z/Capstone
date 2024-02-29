@@ -33,7 +33,7 @@ const FriendListWidget = ({ userId }) => {
   return (
     <WidgetWrapper>
       <Typography
-        color={palette.neutral.dark}
+        color={palette.secondary.dark}
         variant="h5"
         fontWeight="500"
         sx={{ mb: "1.5rem" }}

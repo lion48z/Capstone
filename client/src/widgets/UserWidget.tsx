@@ -33,9 +33,9 @@ const UserWidget: React.FC<UserWidgetProps> = ({ userId, picturePath }) => {
   const { palette } = useTheme();
   const navigate = useNavigate();
   const token = useSelector((state: RootState) => state.token);
-  const dark = palette.neutral.dark;
-  const medium = palette.neutral.medium;
-  const main = palette.neutral.main;
+  const dark = palette.text.disabled;
+  const medium = palette.text.secondary;
+  const main = palette.text.primary;
 
   const getUser = async () => {
     const response = await fetch(`http://localhost:3001/users/${userId}`, {

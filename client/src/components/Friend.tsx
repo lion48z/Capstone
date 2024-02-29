@@ -23,8 +23,8 @@ const Friend: FC<FriendProps> = ({ friendId, name, subtitle, userPicturePath }) 
   const friends = useSelector((state: RootState) => state.user.friends);
 
   const { palette } = useTheme();
-  const { light: primaryLight, dark: primaryDark } = palette.primary;
-  const { main, medium } = palette.neutral;
+  const { light: primaryLight, dark: primaryDark } = palette.text.primary;
+  const { main, medium } = palette.text.primary;
 
   const isFriend = friends.find((friend) => friend._id === friendId);
 
