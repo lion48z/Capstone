@@ -1,4 +1,5 @@
 import { PaletteMode } from "@mui/material";
+import { ThemeProvider } from '@mui/material/styles';
 
 export const colorTokens: Record<string, Record<number, string>> = {
   grey: {
