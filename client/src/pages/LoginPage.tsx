@@ -1,17 +1,17 @@
 import React from "react";
-import { Box, Typography,  useMediaQuery } from "@mui/material";
+import { Box, Typography, useMediaQuery } from "@mui/material";
 import { useTheme } from '@mui/material/styles'
 import Form from "./Form";
 
 const LoginPage: React.FC = () => {
-  const theme = useTheme();
+  const { palette } = useTheme();
   const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
 
   return (
     <Box>
       <Box
         width="100%"
-        bgcolor={theme.palette.primary.light}
+        bgcolor={palette.primary.light}
         padding="1rem 6%"
         textAlign="center"
       >
@@ -25,7 +25,7 @@ const LoginPage: React.FC = () => {
         padding="2rem"
         margin="2rem auto"
         borderRadius="1.5rem"
-        bgcolor={theme.palette.primary.main}
+        bgcolor={palette.primary.main}
       >
         <Typography fontWeight="500" variant="h5" sx={{ mb: "1.5rem" }}>
           Welcome to Farmergram!

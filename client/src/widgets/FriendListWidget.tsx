@@ -34,7 +34,7 @@ const FriendListWidget: React.FC<{ userId: string }> = ({ userId  }) => {
   return (
     <WidgetWrapper>
       <Typography
-        color={palette.secondary.dark}
+        color={palette.primary.dark}
         variant="h5"
         fontWeight="500"
         sx={{ mb: "1.5rem" }}

@@ -7,8 +7,7 @@ import {
   Typography,
   
 } from "@mui/material";
-import { useTheme } from '@mui/material/styles'
-import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
+import { useTheme } from '@mui/material/styles';
 import { Form as FormikForm, Formik, FormikHelpers, FormikProps } from 'formik';
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
@@ -16,7 +15,7 @@ import { useDispatch } from "react-redux";
 import { setLogin } from "../state/state";
 import Dropzone, { IDropzoneProps, ILayoutProps } from 'react-dropzone-uploader'
 
-import FlexBetween from "../components/FlexBetween";
+
 
 interface Values {
   firstName?: string;
@@ -195,18 +194,16 @@ const Form = () => {
                   borderRadius="5px"
                   p="1rem"
                 >
-                  <Dropzone
-                    inputContent="Drop files here"
-                    accept="image/*"
-                    styles={{ dropzone: { minHeight: 100, maxHeight: 200 } }}
-                    onChangeStatus={({ meta }, status) => {
+                 <Dropzone
+                    getUploadParams={() => ({ url: 'http://localhost:3001/auth/register' })}
+                    onChangeStatus={({ meta, file }, status) => {
                       if (status === 'headers_received') {
-                        console.log(`${meta.name} uploaded!`)
+                        console.log(`${meta.name} uploaded!`);
+                        setFieldValue('picture', file); // Update form field with uploaded file
                       }
                     }}
-                    onSubmit={(files) => {
-                      console.log(files.map((f) => f.meta))
-                    }}
+                    inputContent="Drop files here"
+                    accept="image/*"
                   />
                 </Box>
               </>
@@ -235,7 +232,7 @@ const Form = () => {
             />
           </Box>
 
-          {/* BUTTONS */}
+         
           <Box>
             <Button
               fullWidth

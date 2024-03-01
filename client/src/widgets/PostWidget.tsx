@@ -12,6 +12,7 @@ import Friend from "../components/Friend";
 import WidgetWrapper from "../components/WidgetWrapper";
 import { useDispatch, useSelector } from "react-redux";
 import { setPost } from "../state/state";
+import { RootState } from "../app/store"
 
 interface PostWidgetProps {
   postId: string;
@@ -38,7 +39,7 @@ const PostWidget: React.FC<PostWidgetProps> = ({
 }) => {
   const [isComments, setIsComments] = useState<boolean>(false);
   const dispatch = useDispatch();
-  const token = useSelector((state: any) => state.token); 
+  const token = useSelector((state: RootState ) => state.token); 
   const loggedInUserId = useSelector((state: any) => state.user._id); 
   const isLiked = Boolean(likes[loggedInUserId]);
   const likeCount = Object.keys(likes).length;

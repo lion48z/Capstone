@@ -6,10 +6,12 @@ import UserWidget from "../widgets/UserWidget";
 import MyPostWidget from "../widgets/MyPostWidget";
 import PostsWidget from "../widgets/PostsWidget";
 import FriendListWidget from "../widgets/FriendListWidget";
+import { RootState } from '../app/store'
+
 
 const HomePage: React.FC = () => {
   const isNonMobileScreens = useMediaQuery("(min-width:1000px)");
-  const { _id, picturePath } = useSelector((state: any) => state.user);
+  const { _id, picturePath } = useSelector((state: RootState ) => state.user);
 
   return (
     <Box>

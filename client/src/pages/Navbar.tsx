@@ -34,11 +34,11 @@ const Navbar: React.FC = () => {
   const user: any = useSelector((state: RootState) => state.user);
   const isNonMobileScreens = useMediaQuery('(min-width: 1000px)');
 
-  const theme = useTheme();
-  const neutralLight = theme.palette.primary.light;
-  const dark = theme.palette.primary.dark;
-  const background = theme.palette.primary.main;
-  const primaryLight = theme.palette.primary.light;
+  const { palette }= useTheme();
+  const neutralLight = palette.primary.light;
+  const dark = palette.primary.dark;
+  const background = palette.primary.main;
+  const primaryLight = palette.primary.light;
  
   const fullName = `${user.firstName} ${user.lastName}`;
 
@@ -78,7 +78,7 @@ const Navbar: React.FC = () => {
       {isNonMobileScreens ? (
         <FlexBetween gap="2rem">
           <IconButton onClick={() => dispatch(setMode())}>
-            {theme.palette.mode === 'dark' ? (
+            {palette.mode === 'dark' ? (
               <DarkMode sx={{ fontSize: '25px' }} />
             ) : (
               <LightMode sx={{ color: dark, fontSize: '25px' }} />
@@ -154,7 +154,7 @@ const Navbar: React.FC = () => {
               onClick={() => dispatch(setMode())}
               sx={{ fontSize: '25px' }}
             >
-              {theme.palette.mode === 'dark' ? (
+              {palette.mode === 'dark' ? (
                 <DarkMode sx={{ fontSize: '25px' }} />
               ) : (
                 <LightMode sx={{ color: dark, fontSize: '25px' }} />
