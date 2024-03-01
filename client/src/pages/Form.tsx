@@ -25,7 +25,7 @@ interface Values {
   password: string;
   location?: string;
   occupation?: string;
-  picture?: File[];
+  picture?: File;
 }
 
 const registerSchema = yup.object().shape({
@@ -50,7 +50,7 @@ const initialValuesRegister: Values = {
   password: "",
   location: "",
   occupation: "",
-  picture: [],
+  picture: undefined,
 };
 
 const initialValuesLogin: Values = {
