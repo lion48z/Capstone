@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React from "react";
 import { BrowserRouter, Navigate, Routes, Route } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { createTheme, ThemeProvider  } from "@mui/material/styles";
@@ -15,8 +15,6 @@ const darkTheme = createTheme({
 });
 
 function App() {
-  
-
   const isAuth = Boolean(useSelector((state: RootState) => state.token));
 
   return (

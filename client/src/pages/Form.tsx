@@ -8,12 +8,12 @@ import {
   useTheme,
 } from "@mui/material";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
-import { Formik, FormikHelpers } from "formik";
+import { Form as FormikForm, Formik, FormikHelpers, FormikProps } from 'formik';
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setLogin } from "../state/state";
-import Dropzone from "react-dropzone";
+import Dropzone, { FileWithPath } from "react-dropzone";
 import FlexBetween from "../components/FlexBetween";
 
 interface Values {
@@ -58,6 +58,7 @@ const initialValuesLogin: Values = {
 
 const Form = () => {
   const [pageType, setPageType] = useState<"login" | "register">("login");
+  const [picture, setPicture] = useState<FileWithPath | null>(null)
   const { palette } = useTheme();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -193,7 +194,7 @@ const Form = () => {
                   p="1rem"
                 >
              <Dropzone
-                      onDrop={async (acceptedFiles: File[]) => {
+                      onDrop={async (acceptedFiles: FileWithPath[]) => {
                         setFieldValue("picture", acceptedFiles[0]);
                       }}
                       multiple={false}
