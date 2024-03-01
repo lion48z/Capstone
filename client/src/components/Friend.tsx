@@ -24,8 +24,7 @@ const Friend: FC<FriendProps> = ({ friendId, name, subtitle, userPicturePath }) 
   const friends = useSelector((state: RootState) => state.friend.friends);
  
   const { palette } = useTheme();
-  //const { light: primaryLight, dark: primaryDark } = palette.text.primary;
-  //const { main, medium } = palette.text.primary;
+  
 
   const isFriend = friends.find((friend) => friend._id === friendId);
 
@@ -55,19 +54,19 @@ const Friend: FC<FriendProps> = ({ friendId, name, subtitle, userPicturePath }) 
           }}
         >
           <Typography
-            color={palette.text.primary}
+            color={palette.primary.light}
             variant="h5"
             fontWeight="500"
             sx={{
               "&:hover": {
-                color: palette.text.primary,
+                color: palette.primary.light,
                 cursor: "pointer",
               },
             }}
           >
             {name}
           </Typography>
-          <Typography color={palette.text.secondary} fontSize="0.75rem">
+          <Typography color={palette.primary.main} fontSize="0.75rem">
             {subtitle}
           </Typography>
         </Box>
@@ -77,9 +76,9 @@ const Friend: FC<FriendProps> = ({ friendId, name, subtitle, userPicturePath }) 
         sx={{ backgroundColor: palette.text.primary, p: "0.6rem" }}
       >
         {isFriend ? (
-          <PersonRemoveOutlined sx={{ color:palette.text.disabled }} />
+          <PersonRemoveOutlined sx={{ color:palette.primary.dark }} />
         ) : (
-          <PersonAddOutlined sx={{ color: palette.text.disabled }} />
+          <PersonAddOutlined sx={{ color: palette.primary.dark }} />
         )}
       </IconButton>
     </FlexBetween>

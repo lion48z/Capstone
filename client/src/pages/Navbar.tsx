@@ -34,9 +34,9 @@ const Navbar: React.FC = () => {
   const isNonMobileScreens = useMediaQuery('(min-width: 1000px)');
 
   const theme = useTheme();
-  const neutralLight = theme.palette.secondary.light;
-  const dark = theme.palette.secondary.dark;
-  const background = theme.palette.background.default;
+  const neutralLight = theme.palette.primary.light;
+  const dark = theme.palette.primary.dark;
+  const background = theme.palette.primary.main;
   const primaryLight = theme.palette.primary.light;
  
   const fullName = `${user.firstName} ${user.lastName}`;

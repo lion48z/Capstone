@@ -188,11 +188,11 @@ const Form = () => {
                 />
                 <Box
                   gridColumn="span 4"
-                  border={`1px solid ${palette.text.secondary}`}
+                  border={`1px solid ${palette.primary.main}`}
                   borderRadius="5px"
                   p="1rem"
                 >
-               <Dropzone
+             <Dropzone
                       onDrop={async (acceptedFiles: File[]) => {
                         setFieldValue("picture", acceptedFiles[0]);
                       }}
@@ -201,10 +201,10 @@ const Form = () => {
                     {({ getRootProps, getInputProps }) => (
                       <Box
                         {...getRootProps()}
-                        border={`2px dashed ${palette.text.primary}`}
+                        border={`2px dashed ${palette.primary.light}`}
                         p="1rem"
                         sx={{ "&:hover": { cursor: "pointer" } }}
-                      >
+                    >
                         <input {...getInputProps()} />
                         {!values.picture ? (
                           <p>Add Picture Here</p>
@@ -216,7 +216,7 @@ const Form = () => {
                         )}
                       </Box>
                     )}
-                  </Dropzone>
+                        </Dropzone>
                 </Box>
               </>
             )}
@@ -252,9 +252,9 @@ const Form = () => {
               sx={{
                 m: "2rem 0",
                 p: "1rem",
-                backgroundColor: palette.text.primary,
-                color: palette.background.default,
-                "&:hover": { color: palette.text.primary },
+                backgroundColor: palette.primary.light,
+                color: palette.primary.main,
+                "&:hover": { color: palette.primary.main },
               }}
             >
               {isLogin ? "LOGIN" : "REGISTER"}
@@ -266,10 +266,10 @@ const Form = () => {
               }}
               sx={{
                 textDecoration: "underline",
-                color: palette.text.primary,
+                color: palette.primary.light,
                 "&:hover": {
                   cursor: "pointer",
-                  color: palette.text.secondary,
+                  color: palette.primary.main,
                 },
               }}
             >

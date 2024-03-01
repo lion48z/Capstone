@@ -36,8 +36,8 @@ const MyPostWidget: React.FC<{ picturePath: string }> = ({ picturePath }) => {
   const { _id } = useSelector((state: RootState) => state.user);
   const token = useSelector((state: RootState) => state.token);
   const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
-  const mediumMain = palette.text.disabled;
-  const medium = palette.text.secondary;
+  const mediumMain = palette.primary.dark;
+  const medium = palette.primary.main;
 
   const handlePost = async () => {
     const formData = new FormData();
@@ -69,7 +69,7 @@ const MyPostWidget: React.FC<{ picturePath: string }> = ({ picturePath }) => {
           value={post}
           sx={{
             width: "100%",
-            backgroundColor: palette.text.secondary,
+            backgroundColor: palette.primary.main,
             borderRadius: "2rem",
             padding: "1rem 2rem",
           }}
