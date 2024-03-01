@@ -31,7 +31,7 @@ const Navbar: React.FC = () => {
   const [isMobileMenuToggled, setIsMobileMenuToggled] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const user: any = useSelector((state: RootState) => state.user);
+  const user:any = useSelector((state: RootState) => state.user);
   const isNonMobileScreens = useMediaQuery('(min-width: 1000px)');
 
   const { palette }= useTheme();
@@ -57,7 +57,7 @@ const Navbar: React.FC = () => {
             },
           }}
         >
-          Sociopedia
+          Farmergram
         </Typography>
         {isNonMobileScreens && (
           <FlexBetween
