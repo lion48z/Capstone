@@ -77,16 +77,6 @@ export const authSlice = createSlice({
     },
   },
 });
-/*setPost: (state, action: PayloadAction<{ post: IPost }>) => {
-  const updatedPost = action.payload.post;
-  const index = state.posts.findIndex(post => post.userId === updatedPost.userId);
-
-  if (index !== -1) {
-    state.posts[index] = updatedPost;
-  } else {
-    console.error("Post not found");
-  }
-},*/
 
 
 export const { setMode, setLogin, setLogout, setFriends, setPosts, setPost } = authSlice.actions;

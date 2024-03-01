@@ -5,8 +5,9 @@ import {
   TextField,
   useMediaQuery,
   Typography,
-  useTheme,
+  
 } from "@mui/material";
+import { useTheme } from '@mui/material/styles'
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import { Form as FormikForm, Formik, FormikHelpers, FormikProps } from 'formik';
 import * as yup from "yup";

@@ -13,11 +13,12 @@ import {
   Divider,
   Typography,
   InputBase,
-  useTheme,
+ 
   Button,
   IconButton,
   useMediaQuery,
 } from "@mui/material";
+import { useTheme } from '@mui/material/styles'
 import FlexBetween from "../components/FlexBetween";
 import Dropzone from "react-dropzone";
 import UserImage from "../components/UserImage";

@@ -1,5 +1,6 @@
 import React from "react";
-import { Box, Typography, useTheme, useMediaQuery } from "@mui/material";
+import { Box, Typography,  useMediaQuery } from "@mui/material";
+import { useTheme } from '@mui/material/styles'
 import Form from "./Form";
 
 const LoginPage: React.FC = () => {

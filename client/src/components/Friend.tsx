@@ -1,6 +1,7 @@
 import { FC } from "react";
 import { PersonAddOutlined, PersonRemoveOutlined } from "@mui/icons-material";
-import { Box, IconButton, Typography, useTheme } from "@mui/material";
+import { Box, IconButton, Typography } from "@mui/material";
+import { useTheme } from '@mui/material/styles'
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setFriends } from "../state/state";
@@ -73,7 +74,7 @@ const Friend: FC<FriendProps> = ({ friendId, name, subtitle, userPicturePath }) 
       </FlexBetween>
       <IconButton
         onClick={() => patchFriend()}
-        sx={{ backgroundColor: palette.text.primary, p: "0.6rem" }}
+        sx={{ backgroundColor: palette.primary.light, p: "0.6rem" }}
       >
         {isFriend ? (
           <PersonRemoveOutlined sx={{ color:palette.primary.dark }} />
