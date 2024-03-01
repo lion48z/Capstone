@@ -1,40 +1,28 @@
 import React, { useMemo } from "react";
 import { BrowserRouter, Navigate, Routes, Route } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { CssBaseline, ThemeProvider } from "@mui/material";
-import { ThemeOptions } from "@mui/material/styles";
-import { createTheme } from "@mui/material/styles";
-import { themeSettings } from "./theme";
-import { PaletteMode } from "@mui/material";
+import { createTheme, ThemeProvider  } from "@mui/material/styles";
+import CssBaseline from '@mui/material/CssBaseline';
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import ProfilePage from "./pages/ProfilePage";
+import { RootState } from './app/store'
 
-interface RootState {
-  mode: PaletteMode;
-  token: string | null;
-}
+const darkTheme = createTheme({
+  palette: {
+    mode: 'dark',
+  },
+});
 
 function App() {
-  const mode = useSelector((state: RootState) => state.mode);
-  const theme = useMemo(() => {
-    const themeSettingsOptions = themeSettings(mode); 
-    const themeOptions: ThemeOptions = {
-      palette: {
-        ...themeSettingsOptions.palette,
-        mode: themeSettingsOptions.palette.mode
-      },
-      typography: themeSettingsOptions.typography
-    };
-    return createTheme(themeOptions);
-  }, [mode]);
+  
 
   const isAuth = Boolean(useSelector((state: RootState) => state.token));
 
   return (
     <div className="app">
       <BrowserRouter>
-        <ThemeProvider theme={theme}>
+        <ThemeProvider theme={darkTheme}>
           <CssBaseline />
           <Routes>
             <Route path="/" element={<LoginPage />} />
