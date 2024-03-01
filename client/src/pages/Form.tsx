@@ -14,7 +14,8 @@ import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setLogin } from "../state/state";
-import Dropzone, { FileWithPath } from "react-dropzone";
+import Dropzone, { IDropzoneProps, ILayoutProps } from 'react-dropzone-uploader'
+
 import FlexBetween from "../components/FlexBetween";
 
 interface Values {
@@ -24,7 +25,7 @@ interface Values {
   password: string;
   location?: string;
   occupation?: string;
-  picture?: File;
+  picture?: File[];
 }
 
 const registerSchema = yup.object().shape({
@@ -49,7 +50,7 @@ const initialValuesRegister: Values = {
   password: "",
   location: "",
   occupation: "",
-  picture: undefined,
+  picture: [],
 };
 
 const initialValuesLogin: Values = {
@@ -59,7 +60,7 @@ const initialValuesLogin: Values = {
 
 const Form = () => {
   const [pageType, setPageType] = useState<"login" | "register">("login");
-  const [picture, setPicture] = useState<FileWithPath | null>(null)
+ 
   const { palette } = useTheme();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -194,31 +195,19 @@ const Form = () => {
                   borderRadius="5px"
                   p="1rem"
                 >
-             <Dropzone
-                      onDrop={async (acceptedFiles: FileWithPath[]) => {
-                        setFieldValue("picture", acceptedFiles[0]);
-                      }}
-                      multiple={false}
-                    >
-                    {({ getRootProps, getInputProps }) => (
-                      <Box
-                        {...getRootProps()}
-                        border={`2px dashed ${palette.primary.light}`}
-                        p="1rem"
-                        sx={{ "&:hover": { cursor: "pointer" } }}
-                    >
-                        <input {...getInputProps()} />
-                        {!values.picture ? (
-                          <p>Add Picture Here</p>
-                        ) : (
-                          <FlexBetween>
-                            <Typography>{values.picture.name}</Typography>
-                            <EditOutlinedIcon />
-                          </FlexBetween>
-                        )}
-                      </Box>
-                    )}
-                        </Dropzone>
+                  <Dropzone
+                    inputContent="Drop files here"
+                    accept="image/*"
+                    styles={{ dropzone: { minHeight: 100, maxHeight: 200 } }}
+                    onChangeStatus={({ meta }, status) => {
+                      if (status === 'headers_received') {
+                        console.log(`${meta.name} uploaded!`)
+                      }
+                    }}
+                    onSubmit={(files) => {
+                      console.log(files.map((f) => f.meta))
+                    }}
+                  />
                 </Box>
               </>
             )}
@@ -287,3 +276,6 @@ const Form = () => {
 };
 
 export default Form;
+
+
+
