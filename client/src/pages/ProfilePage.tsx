@@ -53,7 +53,7 @@ const ProfilePage: React.FC = () => {
         justifyContent="center"
       >
         <Box flexBasis={isNonMobileScreens ? "26%" : undefined}>
-          <UserWidget userId={user.userId} picturePath={user.picturePath} />
+          <UserWidget   />
           <Box m="2rem 0" />
         {/*  <FriendListWidget userId={user.userId} /> */}
         </Box>

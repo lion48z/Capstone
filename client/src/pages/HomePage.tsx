@@ -17,11 +17,11 @@ const HomePage: React.FC = () =>{
  
 
   return (
-    <>
+    <Box>
     <Navbar />
 <h1> I hate Typescript </h1>
-
-</>
+ <UserWidget />
+    </Box >
   );
 };
 
