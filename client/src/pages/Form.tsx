@@ -94,33 +94,39 @@ const Form = () => {
   };
 
   const login = async (values: Values, onSubmitProps: FormikHelpers<Values>) => {
-    
-    const loggedInResponse = await fetch("http://localhost:3001/auth/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(values),
-    });
-    
-    const loggedIn = await loggedInResponse.json();
-    onSubmitProps.resetForm();
-    
-    console.log("Logged in user:", loggedIn.user);
-    console.log("Token:", loggedIn.token);
-
-
-    if (loggedIn) {
-      dispatch(
-        setLogin({
-          user: loggedIn.user,
-          token: loggedIn.token,
-          
-        })
-      );
-      navigate("/home");
-     
+    try {
+      const loggedInResponse = await fetch("http://localhost:3001/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(values),
+      });
+      
+      const loggedIn = await loggedInResponse.json();
+      onSubmitProps.resetForm();
+      
+      console.log("Logged in user:", loggedIn.user);
+      console.log("Token:", loggedIn.token);
+  
+      // Check if loggedIn is not null or undefined
+      if (loggedIn) {
+        console.log("Dispatching login action...");
+        dispatch(
+          setLogin({
+            user: loggedIn.user,
+            token: loggedIn.token,
+          })
+        );
+  
+        console.log("Navigating to /home...");
+        navigate("/home");
+      } else {
+        console.log("Login failed: loggedIn response is null or undefined");
+      }
+    } catch (error) {
+      console.error("Error occurred during login:", error);
     }
-   
   };
+  
 
   const handleFormSubmit = async (values: Values, onSubmitProps: FormikHelpers<Values>) => {
     if (isLogin) await login(values, onSubmitProps);

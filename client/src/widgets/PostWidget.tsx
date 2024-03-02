@@ -20,7 +20,7 @@ interface PostWidgetProps {
   name: string;
   description?: string;
   location?: string;
-  picturePath: string;
+  picturePath?: string;
   userPicturePath: string;
   likes?: Map<string, boolean>;
   comments?: string[];

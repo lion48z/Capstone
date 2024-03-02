@@ -8,13 +8,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { setFriends } from "../state/state";
 
 
-const FriendListWidget: React.FC<{ userId: string }> = ({ userId  }) => {
+const FriendListWidget: React.FC = () => {
   const dispatch = useDispatch();
   const { palette } = useTheme();
 
-  const { token } = useSelector((state: RootState) => state.auth);
+  const { token, user } = useSelector((state: RootState) => state.auth);
   const friends = useSelector((state: RootState) => state.friend.friends);
-
+  const { userId } = user || {};
   const getFriends = async () => {
     const response = await fetch(
       `http://localhost:3001/users/${userId}/friends`,

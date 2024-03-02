@@ -7,6 +7,8 @@ import { RootState } from '../app/store';
 interface PostsWidgetProps {
   userId: string;
   isProfile?: boolean;
+ 
+  
 }
 
 const PostsWidget: React.FC<PostsWidgetProps> = ({ userId, isProfile = false }) => {

@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 
 interface UserImageProps {
-  image: string;
+  image: any;
   size?: string;
 }
 

@@ -8,14 +8,12 @@ import MyPostWidget from "../widgets/MyPostWidget";
 import PostsWidget from "../widgets/PostsWidget";
 import UserWidget from "../widgets/UserWidget";
 import { RootState } from "../app/store";
+import { User } from '../state/state'
 
-interface User {
-  userId: string;
-  picturePath: string;
-}
 
-const ProfilePage = () => {
-  const [user, setUser] = useState<User | null>(null);
+
+const ProfilePage: React.FC = () => {
+  const [user, setUser] = useState< User | null>(null);
   const { userId } = useParams<{ userId: string }>();
   const { token } = useSelector((state: RootState) => state.auth);
   const isNonMobileScreens = useMediaQuery("(min-width:1000px)");
@@ -57,13 +55,13 @@ const ProfilePage = () => {
         <Box flexBasis={isNonMobileScreens ? "26%" : undefined}>
           <UserWidget userId={user.userId} picturePath={user.picturePath} />
           <Box m="2rem 0" />
-          <FriendListWidget userId={user.userId} />
+        {/*  <FriendListWidget userId={user.userId} /> */}
         </Box>
         <Box
           flexBasis={isNonMobileScreens ? "42%" : undefined}
           mt={isNonMobileScreens ? undefined : "2rem"}
         >
-          <MyPostWidget picturePath={picturePath} />
+         {/* <MyPostWidget picturePath={user.picturePath} />  */}
           <Box m="2rem 0" />
           <PostsWidget userId={user.userId} isProfile />
         </Box>

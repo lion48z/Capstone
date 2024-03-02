@@ -13,10 +13,9 @@ const darkTheme = createTheme({
     mode: 'dark',
   },
 });
-
 function App() {
   const isAuth = Boolean(useSelector((state: RootState) => state.auth));
-
+  
   return (
     <>
       <BrowserRouter>

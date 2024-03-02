@@ -28,7 +28,7 @@ import { setPosts } from "../state/state";
 import { RootState } from "../app/store"; 
 
 
-const MyPostWidget: React.FC<{ picturePath: RootState }> = ({ picturePath }) => {
+const MyPostWidget: React.FC = () => {
   const dispatch = useDispatch();
   const [isImage, setIsImage] = useState<boolean>(false);
   const [image, setImage] = useState<File | null>(null);
@@ -36,12 +36,13 @@ const MyPostWidget: React.FC<{ picturePath: RootState }> = ({ picturePath }) => 
   const { palette } = useTheme();
   const { user } = useSelector((state: RootState) => state.auth);
   const { token } = useSelector((state: RootState) => state.auth);
+  const picturePath = user?.picturePath;
   const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
   const mediumMain = palette.primary.dark;
   const medium = palette.primary.main;
 
   const handlePost = async () => {
-    const { _id, picturePath } = user || {};
+    const { _id } = user || {};
     const formData = new FormData();
     if (_id) {
       formData.append("userId", _id);
