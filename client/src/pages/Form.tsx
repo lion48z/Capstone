@@ -4,15 +4,15 @@ import {
   Button,
   TextField,
   useMediaQuery,
-  Typography,
-  
+  Typography,  
 } from "@mui/material";
 import { useTheme } from '@mui/material/styles';
 import { Form as FormikForm, Formik, FormikHelpers, FormikProps } from 'formik';
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setLogin } from "../state/state";
+import { RootState } from '../app/store'
 import Dropzone, { IDropzoneProps, ILayoutProps } from 'react-dropzone-uploader'
 
 
@@ -66,6 +66,7 @@ const Form = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
   const isLogin = pageType === "login";
   const isRegister = pageType === "register";
+ 
 
   const register = async (values: Values, onSubmitProps: FormikHelpers<Values>) => {
     const formData = new FormData();
@@ -117,7 +118,7 @@ const Form = () => {
           })
         );
   
-        console.log("Navigating to /home...");
+        console.log("Navigating to /home...",loggedIn);
         navigate("/home");
       } else {
         console.log("Login failed: loggedIn response is null or undefined");
