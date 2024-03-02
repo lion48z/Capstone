@@ -9,11 +9,19 @@ import FriendListWidget from "../widgets/FriendListWidget";
 import { RootState } from '../app/store'
 
 
-const HomePage: React.FC = () => {
- /* const isNonMobileScreens = useMediaQuery("(min-width:1000px)");
-  const { _id, picturePath } = useSelector((state: RootState ) => state.user);*/
+const HomePage: React.FC = () =>{
+  const { token } = useSelector((state:RootState) => state.token)
+ /* const isNonMobileScreens = useMediaQuery("(min-width:1000px)");*/
+  const { _id, picturePath } = useSelector((state: RootState ) => state.user);
 return (
+  <>
   <h1>Farmergram Home Page</h1>
+   {/* Display user's ID */}
+   <p>User ID: {_id}</p>
+      
+      {/* Display user's picture path */}
+      <img src={picturePath} alt="User Profile Picture" />
+  </>
   );
 };
 

@@ -35,7 +35,7 @@ const MyPostWidget: React.FC<{ picturePath: string }> = ({ picturePath }) => {
   const [post, setPost] = useState<string>("");
   const { palette } = useTheme();
   const { _id } = useSelector((state: RootState) => state.user);
-  const token = useSelector((state: RootState) => state.token);
+  const { token } = useSelector((state: RootState) => state.token);
   const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
   const mediumMain = palette.primary.dark;
   const medium = palette.primary.main;

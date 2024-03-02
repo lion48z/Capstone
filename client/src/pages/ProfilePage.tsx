@@ -19,7 +19,7 @@ const ProfilePage = () => {
 
   const { userId } = useParams<{ userId: string }>(); // Define the type of useParams
 
-  const token = useSelector((state: RootState) => state.token);
+  const { token } = useSelector((state: RootState) => state.token);
   const isNonMobileScreens = useMediaQuery("(min-width:1000px)");
 
   const getUser = async () => {
