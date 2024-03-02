@@ -118,8 +118,9 @@ const Form = () => {
           })
         );
   
-        console.log("Navigating to /home...",loggedIn);
-        navigate("/home");
+        console.log("Navigating to /home...", loggedIn);
+        
+        navigate('/home');
       } else {
         console.log("Login failed: loggedIn response is null or undefined");
       }

@@ -20,7 +20,7 @@ interface UserWidgetProps {
 const UserWidget: React.FC<UserWidgetProps> = ({ userId, picturePath }) => {
   const { palette } = useTheme();
   const navigate = useNavigate();
-  const { token, user } = useSelector((state: RootState) => state.auth);
+  const { user } = useSelector((state: RootState) => state.auth);
   const dark = palette.primary.dark;
   const medium = palette.primary.main;
   const main = palette.primary.light;
