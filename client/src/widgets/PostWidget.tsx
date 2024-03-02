@@ -22,7 +22,7 @@ interface PostWidgetProps {
   location?: string;
   picturePath: string;
   userPicturePath: string;
-  likes: Record<string, boolean>;
+  likes?: Map<string, boolean>;
   comments?: string[];
 }
 
@@ -34,15 +34,16 @@ const PostWidget: React.FC<PostWidgetProps> = ({
   location,
   picturePath,
   userPicturePath,
-  likes,
+  likes = new Map<string, boolean>(),
   comments,
 }) => {
   const [isComments, setIsComments] = useState<boolean>(false);
   const dispatch = useDispatch();
-  const token = useSelector((state: RootState ) => state.token); 
-  const loggedInUserId = useSelector((state: any) => state.user._id); 
-  const isLiked = Boolean(likes[loggedInUserId]);
-  const likeCount = Object.keys(likes).length;
+  const token = useSelector((state: RootState ) => state.auth); 
+  const loggedInUserId = useSelector((state: any) => state.auth); 
+  const isLiked = likes ? Array.from(likes.keys()).includes(loggedInUserId) : false;
+  const likeCount = likes ? likes.size : 0;
+  
 
   const { palette } = useTheme();
   const main = palette.text.primary;

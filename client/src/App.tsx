@@ -15,7 +15,7 @@ const darkTheme = createTheme({
 });
 
 function App() {
-  const isAuth = Boolean(useSelector((state: RootState) => state.token));
+  const isAuth = Boolean(useSelector((state: RootState) => state.auth));
 
   return (
     <>

@@ -1,11 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-interface IUser {
+interface User {
+  _id: string;
   firstName: string;
   lastName: string;
   email: string;
   password: string;
-  picturePath: string;
+  picturePath?: string;
   friends?: string[];
   location?: string;                 //? to show that these can be undefined or have a value
   occupation?: string;
@@ -13,11 +14,11 @@ interface IUser {
   impressions?: number;
 }
 
-interface IPost {
+export interface Post {
   userId: string;
   firstName: string;
   lastName: string;
-  picturePath: string;
+  picturePath?: string;
   userPicturePath: string;
   friends?: string[];
   description?:string;
@@ -31,9 +32,9 @@ interface IPost {
 
 interface AuthState {
   mode: "light" | "dark";
-  user: IUser | null;
+  user: User | null;
   token: string | null;
-  posts: IPost[];
+  posts: Post[];
 }
 
 const initialState: AuthState = {
@@ -50,7 +51,7 @@ export const authSlice = createSlice({
     setMode: (state) => {
       state.mode = state.mode === "light" ? "dark" : "light";
     },
-    setLogin: (state, action: PayloadAction<{ user: IUser; token: string }>) => {
+    setLogin: (state, action: PayloadAction<{ user: User; token: string }>) => {
       state.user = action.payload.user;
       state.token = action.payload.token;
     },
@@ -65,10 +66,10 @@ export const authSlice = createSlice({
         console.error("user friends non-existent :(");
       }
     },
-    setPosts: (state, action: PayloadAction<{ posts: IPost[] }>) => {
+    setPosts: (state, action: PayloadAction<{ posts: Post[] }>) => {
       state.posts = action.payload.posts;
     },
-    setPost: (state, action: PayloadAction<{ post: IPost }>) => {
+    setPost: (state, action: PayloadAction<{ post: Post }>) => {
       const updatedPosts = state.posts.map((post) => {
         if (post === action.payload.post) return action.payload.post;
         return post;

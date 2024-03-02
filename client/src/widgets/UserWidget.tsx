@@ -4,50 +4,26 @@ import {
   WorkOutlineOutlined,
 } from "@mui/icons-material";
 import { Box, Typography, Divider, useTheme } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import UserImage from "../components/UserImage";
 import FlexBetween from "../components/FlexBetween";
 import WidgetWrapper from "../components/WidgetWrapper";
 import { useSelector } from "react-redux"; 
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { RootState } from '../app/store'
 
-interface User {
-  firstName: string;
-  lastName: string;
-  location?: string;
-  occupation?: string;
-  viewedProfile?: number;
-  impressions?: number;
-  friends: string[];
-}
 
 interface UserWidgetProps {
-  userId: string;
-  picturePath: string;
+  userId?: string;
+  picturePath?: string;
 }
 
 const UserWidget: React.FC<UserWidgetProps> = ({ userId, picturePath }) => {
-  const [user, setUser] = useState<User | null>(null);
   const { palette } = useTheme();
   const navigate = useNavigate();
-  const token = useSelector((state: RootState) => state.token);
+  const { token, user } = useSelector((state: RootState) => state.auth);
   const dark = palette.primary.dark;
   const medium = palette.primary.main;
   const main = palette.primary.light;
-
-  const getUser = async () => {
-    const response = await fetch(`http://localhost:3001/users/${userId}`, {
-      method: "GET",
-      headers: { Authorization: `Bearer ${token}` },
-    });
-    const data = await response.json();
-    setUser(data);
-  };
-
-  useEffect(() => {
-    getUser();
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (!user) {
     return null;
@@ -72,7 +48,7 @@ const UserWidget: React.FC<UserWidgetProps> = ({ userId, picturePath }) => {
         onClick={() => navigate(`/profile/${userId}`)}
       >
         <FlexBetween gap="1rem">
-          <UserImage image={picturePath} />
+          <UserImage image={picturePath || ''} />
           <Box>
             <Typography
               variant="h4"
@@ -87,7 +63,7 @@ const UserWidget: React.FC<UserWidgetProps> = ({ userId, picturePath }) => {
             >
               {firstName} {lastName}
             </Typography>
-            <Typography color={medium}>{friends.length} friends</Typography>
+            <Typography color={medium}>{friends?.length} friends</Typography>
           </Box>
         </FlexBetween>
         <ManageAccountsOutlined />
@@ -133,3 +109,4 @@ const UserWidget: React.FC<UserWidgetProps> = ({ userId, picturePath }) => {
 };
 
 export default UserWidget;
+

@@ -1,25 +1,8 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setPosts } from "../state/state";
+import { setPosts, Post } from "../state/state";
 import PostWidget from "./PostWidget";
-
-interface Post {
-  _id: string;
-  userId: string;
-  firstName: string;
-  lastName: string;
-  description?: string;
-  location?: string;
-  picturePath: string;
-  userPicturePath: string;
-  likes: Map<string, boolean>;
-  comments?: string[];
-}
-
-interface RootState {
-  posts: Post[];
-  token: string; // Assuming token is a string
-}
+import { RootState } from '../app/store';
 
 interface PostsWidgetProps {
   userId: string;
@@ -28,8 +11,8 @@ interface PostsWidgetProps {
 
 const PostsWidget: React.FC<PostsWidgetProps> = ({ userId, isProfile = false }) => {
   const dispatch = useDispatch();
-  const posts = useSelector((state: RootState) => state.posts);
-  const token = useSelector((state: RootState) => state.token);
+  const { posts } = useSelector((state: RootState) => state.auth);
+  const { token, user } = useSelector((state: RootState) => state.auth);
 
   const getPosts = async () => {
     const response = await fetch("http://localhost:3001/posts", {
@@ -51,9 +34,11 @@ const PostsWidget: React.FC<PostsWidgetProps> = ({ userId, isProfile = false }) 
     const data: Post[] = await response.json();
     dispatch(setPosts({ posts: data }));
   };
-  const mapToRecord = (map: Map<string, boolean>): Record<string, boolean> => {
+
+  const mapToRecord = (likes: Map<string, boolean> | undefined): Record<string, boolean> => {
+    if (!likes) return {};
     const obj: Record<string, boolean> = {};
-    map.forEach((value, key) => {
+    likes.forEach((value, key) => {
       obj[key] = value;
     });
     return obj;
@@ -65,13 +50,12 @@ const PostsWidget: React.FC<PostsWidgetProps> = ({ userId, isProfile = false }) 
     } else {
       getPosts();
     }
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [isProfile, userId, token]); // Include dependencies in the dependency array
 
   return (
     <>
       {posts.map(
         ({
-          _id,
           userId,
           firstName,
           lastName,
@@ -83,15 +67,15 @@ const PostsWidget: React.FC<PostsWidgetProps> = ({ userId, isProfile = false }) 
           comments,
         }) => (
           <PostWidget
-            key={_id}
-            postId={_id}
+            key={userId}
+            postId={userId}
             postUserId={userId}
             name={`${firstName} ${lastName}`}
             description={description}
             location={location}
             picturePath={picturePath}
             userPicturePath={userPicturePath}
-            likes={mapToRecord(likes)}
+            //likes={mapToRecord(likes)}
             comments={comments}
           />
         )
@@ -101,3 +85,4 @@ const PostsWidget: React.FC<PostsWidgetProps> = ({ userId, isProfile = false }) 
 };
 
 export default PostsWidget;
+

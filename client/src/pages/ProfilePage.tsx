@@ -10,16 +10,14 @@ import UserWidget from "../widgets/UserWidget";
 import { RootState } from "../app/store";
 
 interface User {
-  picturePath: string;
   userId: string;
+  picturePath: string;
 }
 
 const ProfilePage = () => {
-  const [user, setUser] = useState<User | null>(null); // Specify the type of user state
-
-  const { userId } = useParams<{ userId: string }>(); // Define the type of useParams
-
-  const { token } = useSelector((state: RootState) => state.token);
+  const [user, setUser] = useState<User | null>(null);
+  const { userId } = useParams<{ userId: string }>();
+  const { token } = useSelector((state: RootState) => state.auth);
   const isNonMobileScreens = useMediaQuery("(min-width:1000px)");
 
   const getUser = async () => {
@@ -40,9 +38,11 @@ const ProfilePage = () => {
 
   useEffect(() => {
     getUser();
-  }, [userId, token]); 
-  
-  if (!user) return null;
+  }, [userId, token]);
+
+  if (!user) {
+    return null; // Render null when user is still loading
+  }
 
   return (
     <Box>
@@ -63,7 +63,7 @@ const ProfilePage = () => {
           flexBasis={isNonMobileScreens ? "42%" : undefined}
           mt={isNonMobileScreens ? undefined : "2rem"}
         >
-          <MyPostWidget picturePath={user.picturePath} />
+          <MyPostWidget picturePath={picturePath} />
           <Box m="2rem 0" />
           <PostsWidget userId={user.userId} isProfile />
         </Box>

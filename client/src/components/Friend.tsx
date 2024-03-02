@@ -20,8 +20,8 @@ interface FriendProps {
 const Friend: FC<FriendProps> = ({ friendId, name, subtitle, userPicturePath }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { _id } = useSelector((state: RootState) => state.user);
-  const token = useSelector((state: RootState) => state.token);
+  const { user } = useSelector((state: RootState) => state.auth);
+  const { token } = useSelector((state: RootState) => state.auth);
   const friends = useSelector((state: RootState) => state.friend.friends);
  
   const { palette } = useTheme();
@@ -31,7 +31,7 @@ const Friend: FC<FriendProps> = ({ friendId, name, subtitle, userPicturePath }) 
 
   const patchFriend = async () => {
     const response = await fetch(
-      `http://localhost:3001/users/${_id}/${friendId}`,
+      `http://localhost:3001/users/${user}/${friendId}`,
       {
         method: "PATCH",
         headers: {

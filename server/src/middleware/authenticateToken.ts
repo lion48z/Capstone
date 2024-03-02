@@ -11,17 +11,19 @@ const authenticateToken = (req: Request, res: Response, next: NextFunction) => {
     const token = authHeader && authHeader.split(' ')[1];
   
     if (!token) { 
+      console.log('Access denied: No token provided');
        res.status(403).send('Access Denied');
        return;
     }
 
     jwt.verify(token, process.env.JWT_SECRET as string, async (err, decodedToken) => {
       if (err) {
-        console.error(err);
+       
+        console.error('Error verifying token:', err);
         res.sendStatus(403);
         return;
       }
-
+      console.log('Decoded token:', decodedToken);
       try {
         // Assuming decodedToken contains user information
         const user = await User.findById(decodedToken); 
