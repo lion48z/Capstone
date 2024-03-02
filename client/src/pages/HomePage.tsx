@@ -11,7 +11,7 @@ import { RootState } from '../app/store'
 
 const HomePage: React.FC = () =>{
   const { token } = useSelector((state:RootState) => state.token)
- /* const isNonMobileScreens = useMediaQuery("(min-width:1000px)");*/
+  const isNonMobileScreens = useMediaQuery("(min-width:1000px)");
   const { _id, picturePath } = useSelector((state: RootState ) => state.user);
 return (
   <>
