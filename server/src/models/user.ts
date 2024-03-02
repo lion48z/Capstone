@@ -18,25 +18,25 @@ const UserSchema = new mongoose.Schema<IUser>(
     firstName: {
       type: String,
       required: true,
-      min: 2,
-      max: 50,
+      minlength: 2,
+      maxlength: 50,
     },
     lastName: {
       type: String,
       required: true,
-      min: 2,
-      max: 50,
+      minlength: 2,
+      maxlength: 50,
     },
     email: {
       type: String,
       required: true,
-      max: 50,
+      maxlength: 50,
       unique: true,
     },
     password: {
       type: String,
       required: true,
-      min: 5,
+      minlength: 5,
     },
     picturePath: {
       type: String,
@@ -46,10 +46,22 @@ const UserSchema = new mongoose.Schema<IUser>(
       type: [String],
       default: [],
     },
-    location: String,
-    occupation: String,
-    viewedProfile: Number,
-    impressions: Number,
+    location: {
+      type: String,
+      default: undefined,
+    },
+    occupation: {
+      type: String,
+      default: undefined,
+    },
+    viewedProfile: {
+      type: Number,
+      default: undefined,
+    },
+    impressions: {
+      type: Number,
+      default: undefined,
+    },
   },
   { timestamps: true }
 );

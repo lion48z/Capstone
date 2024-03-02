@@ -18,7 +18,7 @@ return (
   <h1>Farmergram Home Page</h1>
    {/* Display user's ID */}
    <p>User ID: {_id}</p>
-      
+   <UserWidget userId={_id} picturePath={picturePath} />
       {/* Display user's picture path */}
       <img src={picturePath} alt="User Profile Picture" />
   </>

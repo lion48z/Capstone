@@ -1,4 +1,5 @@
-import mongoose, { Document, Model } from "mongoose";
+import mongoose, { Document, Model, Schema } from "mongoose";
+
 interface IPost extends Document {
     userId: string;
     firstName: string;
@@ -6,45 +7,45 @@ interface IPost extends Document {
     picturePath: string;
     userPicturePath: string;
     friends?: string[];
-    description?:string;
-    location?: string;                 //? to show that these can be undefined or have a value
+    description?: string;
+    location?: string;
     occupation?: string;
     viewedProfile?: number;
     impressions?: number;
     likes: Map<string, boolean>;
     comments?: string[];
-
 }
-const postSchema =  new mongoose.Schema<IPost>(
-  {
-    userId: {
-      type: String,
-      required: true,
+
+const postSchema = new Schema<IPost>(
+    {
+        userId: {
+            type: String,
+            required: true,
+        },
+        firstName: {
+            type: String,
+            required: true,
+        },
+        lastName: {
+            type: String,
+            required: true,
+        },
+        location: String,
+        description: String,
+        picturePath: String,
+        userPicturePath: String,
+        likes: {
+            type: Schema.Types.Mixed,
+            default: {},
+        },
+        comments: {
+            type: Schema.Types.Mixed,
+            default: [],
+        },
     },
-    firstName: {
-      type: String,
-      required: true,
-    },
-    lastName: {
-      type: String,
-      required: true,
-    },
-    location: String,
-    description: String,
-    picturePath: String,
-    userPicturePath: String,
-    likes: {
-      type: Map,
-      of: Boolean,
-    },
-    comments: {
-      type: Array,
-      default: [],
-    },
-  },
-  { timestamps: true }
+    { timestamps: true }
 );
 
 const Post: Model<IPost> = mongoose.model("Post", postSchema);
 
-export default Post ;
+export default Post;
