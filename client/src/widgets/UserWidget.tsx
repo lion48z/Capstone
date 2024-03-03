@@ -18,8 +18,8 @@ const  user  = useSelector((state: RootState) => state.auth);
  
 
   return (
-    <Box>
-    <UserImage image={picturePath || ''} />
+   <Box>
+    
     </Box>
          
   );

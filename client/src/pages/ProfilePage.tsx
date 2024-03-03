@@ -39,7 +39,7 @@ const ProfilePage: React.FC = () => {
   }, [userId, token]);
 
   if (!user) {
-    return null; // Render null when user is still loading
+    return null; 
   }
 
   return (

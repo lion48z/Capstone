@@ -14,28 +14,26 @@ export interface User {
   viewedProfile?: number;
   impressions?: number;
 }
-
 export interface Post {
+  _id: string;
   userId: string;
   firstName: string;
   lastName: string;
-  picturePath?: string;
+  location: string;
+  picturePath: string;
   userPicturePath: string;
-  friends?: string[];
-  description?:string;
-  location?: string;                 //? to show that these can be undefined or have a value
-  occupation?: string;
-  viewedProfile?: number;
-  impressions?: number;
-  likes?: Map<string, boolean>;
+  description?: string;
+  likes: Map<string, boolean>;
   comments?: string[];
 }
+
+
 
 interface AuthState {
   mode: "light" | "dark";
   user: User | null;
   token: string | null;
-  posts: Post[];
+  posts: any[]; // Define the type of your posts array
 }
 
 const initialState: AuthState = {
@@ -53,7 +51,6 @@ export const authSlice = createSlice({
       state.mode = state.mode === "light" ? "dark" : "light";
     },
     setLogin: (state, action: PayloadAction<{ user: User; token: string }>) => {
-      console.log("Login payload:", action.payload);
       state.user = action.payload.user;
       state.token = action.payload.token;
     },
@@ -68,19 +65,18 @@ export const authSlice = createSlice({
         console.error("user friends non-existent :(");
       }
     },
-    setPosts: (state, action: PayloadAction<{ posts: Post[] }>) => {
+    setPosts: (state, action: PayloadAction<{ posts: any[] }>) => {
       state.posts = action.payload.posts;
     },
-    setPost: (state, action: PayloadAction<{ post: Post }>) => {
+    setPost: (state, action: PayloadAction<{ post: any }>) => {
       const updatedPosts = state.posts.map((post) => {
-        if (post === action.payload.post) return action.payload.post;
+        if (post._id === action.payload.post._id) return action.payload.post;
         return post;
       });
       state.posts = updatedPosts;
     },
   },
 });
-
 
 export const { setMode, setLogin, setLogout, setFriends, setPosts, setPost } = authSlice.actions;
 export default authSlice.reducer;

@@ -1,5 +1,21 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store'
+
+export interface User {
+  _id: string;
+  userId: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  picturePath?: string;
+  friends?: string[];
+  location?: string;                 //? to show that these can be undefined or have a value
+  occupation?: string;
+  viewedProfile?: number;
+  impressions?: number;
+}
+
 interface UserState {
   _id: string;
   friends: string[];

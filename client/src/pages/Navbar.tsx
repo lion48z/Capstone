@@ -11,13 +11,8 @@ import { setLogout } from '../state/state';
 import { useNavigate } from 'react-router-dom';
 
 const Navbar: React.FC = () => {
-  
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-
- 
-
   const handleLogout = () => {
     dispatch(setLogout());
   };

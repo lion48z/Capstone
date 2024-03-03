@@ -7,20 +7,16 @@ import MyPostWidget from "../widgets/MyPostWidget";
 import PostsWidget from "../widgets/PostsWidget";
 import FriendListWidget from "../widgets/FriendListWidget";
 import { RootState } from '../app/store';
+import Friend from '../components/Friend';
 
 const HomePage: React.FC = () =>{
- 
-  const isNonMobileScreens = useMediaQuery("(min-width:1000px)");
 
-
-  // Perform null check before accessing properties
- 
+  
 
   return (
     <Box>
     <Navbar />
-<h1> I hate Typescript </h1>
- <UserWidget />
+  
     </Box >
   );
 };

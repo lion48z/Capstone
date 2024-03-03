@@ -12,7 +12,8 @@ const FriendListWidget: React.FC = () => {
   const dispatch = useDispatch();
   const { palette } = useTheme();
 
-  const { token, user } = useSelector((state: RootState) => state.auth);
+  const token = useSelector((state: RootState) => state.auth.token);
+  const user = useSelector((state: RootState) => state.auth.user);
   const friends = useSelector((state: RootState) => state.friend.friends);
   const { userId } = user || {};
   const getFriends = async () => {
