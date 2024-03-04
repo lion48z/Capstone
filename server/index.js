@@ -9,7 +9,7 @@ import dotenv from 'dotenv';
 import multer from "multer"; //middleware for handling multipart/form-data.
 import helmet from "helmet"; //Helmet.js is an open source JavaScript library that helps you secure your Node.js application by setting several HTTP headers.
 import morgan from "morgan"; //HTTP request logger middleware for node.js
-//Named after Dexter, a show you should not watch until completion.
+
 import path from "path";
 import { fileURLToPath } from "url";
 import authRoutes from "./routes/auth";
@@ -23,6 +23,7 @@ import verifyToken from "./middleware/verifyToken";
 //import Post from "./models/post";
 //import { users, posts } from "./data/index";
 dotenv.config();
+
 
 const app = express();
 
