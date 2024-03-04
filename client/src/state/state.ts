@@ -33,7 +33,7 @@ interface AuthState {
   mode: "light" | "dark";
   user: User | null;
   token: string | null;
-  posts: any[]; // Define the type of your posts array
+  posts: Post[]; // Define the type of your posts array
 }
 
 const initialState: AuthState = {
@@ -65,10 +65,10 @@ export const authSlice = createSlice({
         console.error("user friends non-existent :(");
       }
     },
-    setPosts: (state, action: PayloadAction<{ posts: any[] }>) => {
+    setPosts: (state, action: PayloadAction<{ posts: Post[] }>) => {
       state.posts = action.payload.posts;
     },
-    setPost: (state, action: PayloadAction<{ post: any }>) => {
+    setPost: (state, action: PayloadAction<{ post: Post}>) => {
       const updatedPosts = state.posts.map((post) => {
         if (post._id === action.payload.post._id) return action.payload.post;
         return post;
