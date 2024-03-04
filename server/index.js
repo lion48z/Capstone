@@ -13,7 +13,7 @@ import morgan from "morgan"; //HTTP request logger middleware for node.js
 import path from "path";
 import { fileURLToPath } from "url";
 
-import authRoutes from "../src/routes/authRoutes.js";
+import authRoutes from "./routes/authRoutes.js"
 /*import userRoutes from "../routes/users";
 import postRoutes from "../routes/posts";
 import { register } from "../controllers/auth";
