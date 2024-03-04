@@ -12,19 +12,19 @@ import morgan from "morgan"; //HTTP request logger middleware for node.js
 //Named after Dexter, a show you should not watch until completion.
 import path from "path";
 import { fileURLToPath } from "url";
-import authRoutes from "./routes/auth";
-import userRoutes from "./routes/users";
-import postRoutes from "./routes/posts";
-import { register } from "./controllers/auth";
-import { createPost } from "./controllers/posts";
-import authenticateToken from "./middleware/authenticateToken";
+import authRoutes from "./routes/auth.js";
+import userRoutes from "./routes/users.js";
+import postRoutes from "./routes/posts.js";
+import { register } from "./controllers/auth.js";
+import { createPost } from "./controllers/posts.js";
+import verifyToken from "./middleware/verifyToken.js";
 
 //import User from "./models/user";
 //import Post from "./models/post";
 //import { users, posts } from "./data/index";
 dotenv.config();
 
-const app: Express = express();
+const app = express();
 
 app.use(cors({
   credentials: true,
@@ -38,7 +38,7 @@ app.use(morgan("common"));
 app.use(bodyParser.json({ limit: "30mb"}));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 
-const PORT= process.env.PORT ? Number(process.env.PORT): 6001;
+const PORT= process.env.PORT || 6001;
 const MONGO_USERNAME = process.env.MONGO_USERNAME || '';
 const MONGO_PASSWORD = process.env.MONGO_PASSWORD || '';
 const MONGO_URL = `mongodb+srv://${MONGO_USERNAME}:${MONGO_PASSWORD}@cluster0.5yfcerx.mongodb.net/?retryWrites=true&w=majority`
@@ -54,7 +54,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 app.post("/auth/register", upload.single("picture"), register);
-app.post("/posts", authenticateToken, upload.single("picture"), createPost);
+app.post("/posts", verifyToken, upload.single("picture"), createPost);
 
 app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
