@@ -12,12 +12,13 @@ import morgan from "morgan"; //HTTP request logger middleware for node.js
 
 import path from "path";
 import { fileURLToPath } from "url";
-import authRoutes from "./routes/auth";
-import userRoutes from "./routes/users";
-import postRoutes from "./routes/posts";
-import { register } from "./controllers/auth";
-import { createPost } from "./controllers/posts";
-import verifyToken from "./middleware/verifyToken";
+
+import authRoutes from "../src/routes/authRoutes.js";
+/*import userRoutes from "../routes/users";
+import postRoutes from "../routes/posts";
+import { register } from "../controllers/auth";
+import { createPost } from "../controllers/posts";
+import verifyToken from "../middleware/verifyToken";*/
 
 //import User from "./models/user";
 //import Post from "./models/post";
@@ -30,7 +31,7 @@ const app = express();
 app.use(cors({
   credentials: true,
 }));
-app.use("/assets", express.static(path.join(__dirname, "public/assets")));
+//app.use("/assets", express.static(path.join(__dirname, "public/assets")));
 app.use(compression());
 app.use(cookieParser());
 app.use(helmet());
@@ -55,11 +56,11 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 app.post("/auth/register", upload.single("picture"), register);
-app.post("/posts", verifyToken, upload.single("picture"), createPost);
+//app.post("/posts", verifyToken, upload.single("picture"), createPost);
 
 app.use("/auth", authRoutes);
-app.use("/users", userRoutes);
-app.use("/posts", postRoutes);
+/*app.use("/users", userRoutes);
+app.use("/posts", postRoutes);*/
 
 
 
