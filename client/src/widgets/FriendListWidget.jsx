@@ -8,14 +8,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { setFriends } from "../state/state";
 
 
-const FriendListWidget: React.FC = () => {
+const FriendListWidget = ({ userId }) => {
   const dispatch = useDispatch();
   const { palette } = useTheme();
+  const token = useSelector((state) => state.token);
+  const friends = useSelector((state) => state.user.friends);
 
-  const token = useSelector((state: RootState) => state.auth.token);
-  const user = useSelector((state: RootState) => state.auth.user);
-  const friends = useSelector((state: RootState) => state.friend.friends);
-  const { userId } = user || {};
   const getFriends = async () => {
     const response = await fetch(
       `http://localhost:3001/users/${userId}/friends`,
@@ -30,12 +28,12 @@ const FriendListWidget: React.FC = () => {
 
   useEffect(() => {
     getFriends();
-  }, []); //eslint-disable-line react-hooks/exhaustive-deps
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <WidgetWrapper>
       <Typography
-        color={palette.primary.dark}
+        color={palette.neutral.dark}
         variant="h5"
         fontWeight="500"
         sx={{ mb: "1.5rem" }}

@@ -10,28 +10,24 @@ import UserImage from "./UserImage";
 import { RootState } from "../app/store";
 
 
-interface FriendProps {
-  friendId: string;
-  name: string;
-  subtitle?: string;
-  userPicturePath: string;
-}
-
-const Friend: FC<FriendProps> = ({ friendId, name, subtitle, userPicturePath }) => {
+const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { user } = useSelector((state: RootState) => state.auth);
-  const { token } = useSelector((state: RootState) => state.auth);
-  const friends = useSelector((state: RootState) => state.friend.friends);
- 
+  const { _id } = useSelector((state) => state.user);
+  const token = useSelector((state) => state.token);
+  const friends = useSelector((state) => state.user.friends);
+
   const { palette } = useTheme();
-  
+  const primaryLight = palette.primary.light;
+  const primaryDark = palette.primary.dark;
+  const main = palette.neutral.main;
+  const medium = palette.neutral.medium;
 
   const isFriend = friends.find((friend) => friend._id === friendId);
 
   const patchFriend = async () => {
     const response = await fetch(
-      `http://localhost:3001/users/${user}/${friendId}`,
+      `http://localhost:3001/users/${_id}/${friendId}`,
       {
         method: "PATCH",
         headers: {
@@ -55,7 +51,7 @@ const Friend: FC<FriendProps> = ({ friendId, name, subtitle, userPicturePath }) 
           }}
         >
           <Typography
-            color={palette.primary.light}
+            color={main}
             variant="h5"
             fontWeight="500"
             sx={{
@@ -67,19 +63,19 @@ const Friend: FC<FriendProps> = ({ friendId, name, subtitle, userPicturePath }) 
           >
             {name}
           </Typography>
-          <Typography color={palette.primary.main} fontSize="0.75rem">
+          <Typography color={medium} fontSize="0.75rem">
             {subtitle}
           </Typography>
         </Box>
       </FlexBetween>
       <IconButton
         onClick={() => patchFriend()}
-        sx={{ backgroundColor: palette.primary.light, p: "0.6rem" }}
+        sx={{ backgroundColor: primaryLight, p: "0.6rem" }}
       >
         {isFriend ? (
-          <PersonRemoveOutlined sx={{ color:palette.primary.dark }} />
+          <PersonRemoveOutlined sx={{ color: primaryDark }} />
         ) : (
-          <PersonAddOutlined sx={{ color: palette.primary.dark }} />
+          <PersonAddOutlined sx={{ color: primaryDark }} />
         )}
       </IconButton>
     </FlexBetween>

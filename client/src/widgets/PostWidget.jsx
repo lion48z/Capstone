@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import {
-  ChatBubbleOutlineOutlined,
+  
   FavoriteBorderOutlined,
   FavoriteOutlined,
-  ShareOutlined,
+  
 } from "@mui/icons-material";
 import { Box, Divider, IconButton, Typography} from "@mui/material";
 import { useTheme } from '@mui/material/styles'
@@ -14,19 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setPost } from "../state/state";
 import { RootState } from "../app/store"
 
-interface PostWidgetProps {
-  postId: string;
-  postUserId: string;
-  name: string;
-  description?: string;
-  location?: string;
-  picturePath?: string;
-  userPicturePath: string;
-  likes?: Map<string, boolean>;
-  comments?: string[];
-}
-
-const PostWidget: React.FC<PostWidgetProps> = ({
+const PostWidget = ({
   postId,
   postUserId,
   name,
@@ -34,15 +22,15 @@ const PostWidget: React.FC<PostWidgetProps> = ({
   location,
   picturePath,
   userPicturePath,
-  likes = new Map<string, boolean>(),
+  likes,
   comments,
 }) => {
-  const [isComments, setIsComments] = useState<boolean>(false);
+  const [isComments, setIsComments] = useState(false);
   const dispatch = useDispatch();
-  const token = useSelector((state: RootState ) => state.auth); 
-  const loggedInUserId = useSelector((state: any) => state.auth); 
-  const isLiked = likes ? Array.from(likes.keys()).includes(loggedInUserId) : false;
-  const likeCount = likes ? likes.size : 0;
+  const token = useSelector((state) => state.token);
+  const loggedInUserId = useSelector((state) => state.user._id);
+  const isLiked = Boolean(likes[loggedInUserId]);
+  const likeCount = Object.keys(likes).length;
   
 
   const { palette } = useTheme();
@@ -87,27 +75,19 @@ const PostWidget: React.FC<PostWidgetProps> = ({
       <FlexBetween mt="0.25rem">
         <FlexBetween gap="1rem">
           <FlexBetween gap="0.3rem">
-            <IconButton onClick={patchLike}>
-              {isLiked ? (
-                <FavoriteOutlined sx={{ color: primary }} />
-              ) : (
-                <FavoriteBorderOutlined />
-              )}
-            </IconButton>
+            
             <Typography>{likeCount}</Typography>
           </FlexBetween>
 
           <FlexBetween gap="0.3rem">
-            <IconButton onClick={() => setIsComments(!isComments)}>
-              <ChatBubbleOutlineOutlined />
-            </IconButton>
+            
+              
+           
             <Typography>{comments?.length}</Typography>
           </FlexBetween>
         </FlexBetween>
 
-        <IconButton>
-          <ShareOutlined />
-        </IconButton>
+       
       </FlexBetween>
       {isComments && (
         <Box mt="0.5rem">

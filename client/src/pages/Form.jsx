@@ -10,22 +10,10 @@ import { useTheme } from '@mui/material/styles';
 import { Form as FormikForm, Formik, FormikHelpers, FormikProps } from 'formik';
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setLogin } from "../state/state";
-import { RootState } from '../app/store'
-import Dropzone, { IDropzoneProps, ILayoutProps } from 'react-dropzone-uploader'
-
-
-
-interface Values {
-  firstName?: string;
-  lastName?: string;
-  email: string;
-  password: string;
-  location?: string;
-  occupation?: string;
-  picture?: File;
-}
+import Dropzone from "react-dropzone";
+import FlexBetween from "../components/FlexBetween";
 
 const registerSchema = yup.object().shape({
   firstName: yup.string().required("required"),
@@ -42,50 +30,45 @@ const loginSchema = yup.object().shape({
   password: yup.string().required("required"),
 });
 
-const initialValuesRegister: Values = {
+const initialValuesRegister = {
   firstName: "",
   lastName: "",
   email: "",
   password: "",
   location: "",
   occupation: "",
-  picture: undefined,
+  picture: "",
 };
 
-const initialValuesLogin: Values = {
+const initialValuesLogin = {
   email: "",
   password: "",
 };
 
 const Form = () => {
-  const [pageType, setPageType] = useState<"login" | "register">("login");
- 
+  const [pageType, setPageType] = useState("login");
   const { palette } = useTheme();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isNonMobile = useMediaQuery("(min-width:600px)");
   const isLogin = pageType === "login";
   const isRegister = pageType === "register";
- 
 
-  const register = async (values: Values, onSubmitProps: FormikHelpers<Values>) => {
-    const formData = new FormData();
-    for (const value in values) {
-      const key = value as keyof Values;
-      const data = values[key];
-      if (data !== undefined && data instanceof Blob) {
-        formData.append(key, data);
-      }
-    }
+  const register = async (values, onSubmitProps) => {
     
-    if (values.picture) {
-      formData.append("picturePath", values.picture.name);
+    const formData = new FormData();
+    for (let value in values) {
+      formData.append(value, values[value]);
     }
+    formData.append("picturePath", values.picture.name);
 
-    const savedUserResponse = await fetch("http://localhost:3001/auth/register", {
-      method: "POST",
-      body: formData,
-    });
+    const savedUserResponse = await fetch(
+      "http://localhost:3001/auth/register",
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
     const savedUser = await savedUserResponse.json();
     onSubmitProps.resetForm();
 
@@ -94,43 +77,31 @@ const Form = () => {
     }
   };
 
-  const login = async (values: Values, onSubmitProps: FormikHelpers<Values>) => {
-    try {
-      const loggedInResponse = await fetch("http://localhost:3001/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(values),
-      });
-      
-      const loggedIn = await loggedInResponse.json();
-      onSubmitProps.resetForm();
-      
-      console.log("Logged in user:", loggedIn.user);
-      console.log("Token:", loggedIn.token);
-  
-      // Check if loggedIn is not null or undefined
-      if (loggedIn) {
-        console.log("Dispatching login action...");
-        dispatch(
-          setLogin({
-            user: loggedIn.user,
-            token: loggedIn.token,
-          })
-        );
-  
-        console.log("Navigating to /home...", loggedIn);
-        
-        navigate('/home');
-      } else {
-        console.log("Login failed: loggedIn response is null or undefined");
-      }
-    } catch (error) {
-      console.error("Error occurred during login:", error);
+  const login = async (values, onSubmitProps) => {
+    const loggedInResponse = await fetch("http://localhost:3001/auth/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(values),
+    });
+    const loggedIn = await loggedInResponse.json();
+    onSubmitProps.resetForm();
+    console.log("Logged in user:", loggedIn.user);
+
+    console.log("Token:", loggedIn.token);
+    if (loggedIn) {
+      console.log("Dispatching login action...");
+      dispatch(
+        setLogin({
+          user: loggedIn.user,
+          token: loggedIn.token,
+        })
+      );
+      console.log("Navigating to /home...", loggedIn);
+      navigate("/home");
     }
   };
-  
 
-  const handleFormSubmit = async (values: Values, onSubmitProps: FormikHelpers<Values>) => {
+  const handleFormSubmit = async (values, onSubmitProps) => {
     if (isLogin) await login(values, onSubmitProps);
     if (isRegister) await register(values, onSubmitProps);
   };
@@ -208,21 +179,36 @@ const Form = () => {
                 />
                 <Box
                   gridColumn="span 4"
-                  border={`1px solid ${palette.primary.main}`}
+                  border={`1px solid ${palette.neutral.medium}`}
                   borderRadius="5px"
                   p="1rem"
                 >
-                 <Dropzone
-                    getUploadParams={() => ({ url: 'http://localhost:3001/auth/register' })}
-                    onChangeStatus={({ meta, file }, status) => {
-                      if (status === 'headers_received') {
-                        console.log(`${meta.name} uploaded!`);
-                        setFieldValue('picture', file); // Update form field with uploaded file
-                      }
-                    }}
-                    inputContent="Drop files here"
-                    accept="image/*"
-                  />
+                  <Dropzone
+                    acceptedFiles=".jpg,.jpeg,.png"
+                    multiple={false}
+                    onDrop={(acceptedFiles) =>
+                      setFieldValue("picture", acceptedFiles[0])
+                    }
+                  >
+                    {({ getRootProps, getInputProps }) => (
+                      <Box
+                        {...getRootProps()}
+                        border={`2px dashed ${palette.primary.main}`}
+                        p="1rem"
+                        sx={{ "&:hover": { cursor: "pointer" } }}
+                      >
+                        <input {...getInputProps()} />
+                        {!values.picture ? (
+                          <p>Add Picture Here</p>
+                        ) : (
+                          <FlexBetween>
+                            <Typography>{values.picture.name}</Typography>
+                           
+                          </FlexBetween>
+                        )}
+                      </Box>
+                    )}
+                  </Dropzone>
                 </Box>
               </>
             )}
@@ -258,8 +244,8 @@ const Form = () => {
               sx={{
                 m: "2rem 0",
                 p: "1rem",
-                backgroundColor: palette.primary.light,
-                color: palette.primary.main,
+                backgroundColor: palette.primary.main,
+                color: palette.background.default,
                 "&:hover": { color: palette.primary.main },
               }}
             >
@@ -272,10 +258,10 @@ const Form = () => {
               }}
               sx={{
                 textDecoration: "underline",
-                color: palette.primary.light,
+                color: palette.primary.main,
                 "&:hover": {
                   cursor: "pointer",
-                  color: palette.primary.main,
+                  color: palette.primary.light,
                 },
               }}
             >

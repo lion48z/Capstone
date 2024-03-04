@@ -10,7 +10,7 @@ import { useDispatch } from 'react-redux';
 import { setLogout } from '../state/state';
 import { useNavigate } from 'react-router-dom';
 
-const Navbar: React.FC = () => {
+const Navbar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleLogout = () => {

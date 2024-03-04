@@ -3,7 +3,7 @@ import { Box, Typography, useMediaQuery } from "@mui/material";
 import { useTheme } from '@mui/material/styles'
 import Form from "./Form";
 
-const LoginPage: React.FC = () => {
+const LoginPage= () => {
   const { palette } = useTheme();
   const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
 

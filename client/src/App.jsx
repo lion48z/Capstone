@@ -1,31 +1,28 @@
-import React from "react";
 import { BrowserRouter, Navigate, Routes, Route } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { createTheme, ThemeProvider  } from "@mui/material/styles";
-import CssBaseline from '@mui/material/CssBaseline';
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import ProfilePage from "./pages/ProfilePage";
-import { RootState } from './app/store'
+import { useMemo } from "react";
+import { useSelector } from "react-redux";
+import { CssBaseline, ThemeProvider } from "@mui/material";
+import { createTheme } from "@mui/material/styles";
+import { themeSettings } from "./theme";
 
-const darkTheme = createTheme({
-  palette: {
-    mode: 'dark',
-  },
-});
 function App() {
-  const isAuth = useSelector((state: RootState) => state.auth?.user !== null);
+  const mode = useSelector((state) => state.mode);
+  const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
+  const isAuth = Boolean(useSelector((state) => state.token));
   console.log('Auth', isAuth)
   return (
-    <>
+    <div className="app">
       <BrowserRouter>
-        <ThemeProvider theme={darkTheme}>
+        <ThemeProvider theme={theme}>
           <CssBaseline />
           <Routes>
             <Route path="/" element={<LoginPage />} />
             <Route
               path="/home"
-              element={isAuth ? <HomePage  /> : <Navigate to="/" />}
+              element={isAuth ? <HomePage /> : <Navigate to="/" />}
             />
             <Route
               path="/profile/:userId"
@@ -34,7 +31,7 @@ function App() {
           </Routes>
         </ThemeProvider>
       </BrowserRouter>
-    </>
+    </div>
   );
 }
 
