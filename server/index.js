@@ -1,4 +1,4 @@
-import express, { Express } from 'express';
+import express from 'express';
 import http from 'http';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
@@ -12,12 +12,12 @@ import morgan from "morgan"; //HTTP request logger middleware for node.js
 //Named after Dexter, a show you should not watch until completion.
 import path from "path";
 import { fileURLToPath } from "url";
-import authRoutes from "./routes/auth.js";
-import userRoutes from "./routes/users.js";
-import postRoutes from "./routes/posts.js";
-import { register } from "./controllers/auth.js";
-import { createPost } from "./controllers/posts.js";
-import verifyToken from "./middleware/verifyToken.js";
+import authRoutes from "./routes/auth";
+import userRoutes from "./routes/users";
+import postRoutes from "./routes/posts";
+import { register } from "./controllers/auth";
+import { createPost } from "./controllers/posts";
+import verifyToken from "./middleware/verifyToken";
 
 //import User from "./models/user";
 //import Post from "./models/post";
