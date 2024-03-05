@@ -36,7 +36,7 @@ app.use(cors({
 
 }));
 
-//app.use("/assets", express.static(path.join(__dirname, "public/assets")));
+//app.use("/assets", express.static(path.join(__dirname, "public/assets.cjs")));  this doesn't work
 
 app.use(compression());
 
