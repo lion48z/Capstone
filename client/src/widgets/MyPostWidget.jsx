@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import {
-
- 
+  EditOutlined,
+  DeleteOutlined,
+  AttachFileOutlined,
+  GifBoxOutlined,
+  ImageOutlined,
+  MicOutlined,
+  MoreHorizOutlined,
  
 } from "@mui/icons-material";
 import {
@@ -9,6 +14,8 @@ import {
   Divider,
   Typography,
   InputBase,
+  Button,
+  SvgIcon,
   IconButton,
    useMediaQuery,
 } from "@mui/material";
@@ -96,7 +103,7 @@ const MyPostWidget = ({ picturePath }) => {
                   ) : (
                     <FlexBetween>
                       <Typography>{image.name}</Typography>
-                     
+                      <EditOutlined />
                     </FlexBetween>
                   )}
                 </Box>
@@ -105,7 +112,7 @@ const MyPostWidget = ({ picturePath }) => {
                     onClick={() => setImage(null)}
                     sx={{ width: "15%" }}
                   >
-                   
+                   <DeleteOutlined /> 
                   </IconButton>
                 )}
               </FlexBetween>
@@ -118,7 +125,7 @@ const MyPostWidget = ({ picturePath }) => {
 
       <FlexBetween>
         <FlexBetween gap="0.25rem" onClick={() => setIsImage(!isImage)}>
-          
+        <ImageOutlined sx={{ color: mediumMain }} />
           <Typography
             color={mediumMain}
             sx={{ "&:hover": { cursor: "pointer", color: medium } }}
@@ -130,37 +137,37 @@ const MyPostWidget = ({ picturePath }) => {
         {isNonMobileScreens ? (
           <>
             <FlexBetween gap="0.25rem">
-             
+            <GifBoxOutlined sx={{ color: mediumMain }} />
               <Typography color={mediumMain}>Clip</Typography>
             </FlexBetween>
 
             <FlexBetween gap="0.25rem">
-            
+            <AttachFileOutlined sx={{ color: mediumMain }} />
               <Typography color={mediumMain}>Attachment</Typography>
             </FlexBetween>
 
             <FlexBetween gap="0.25rem">
-             
+            <MicOutlined sx={{ color: mediumMain }} />
               <Typography color={mediumMain}>Audio</Typography>
             </FlexBetween>
           </>
         ) : (
           <FlexBetween gap="0.25rem">
-            
+           <MoreHorizOutlined sx={{ color: mediumMain }} /> 
           </FlexBetween>
         )}
 
-        <IconButton
+        <Button
           disabled={!post}
           onClick={handlePost}
           sx={{
-            color: palette.background.alt,
+            color: palette.primary.light,
             backgroundColor: palette.primary.main,
             borderRadius: "3rem",
           }}
         >
           POST
-        </IconButton>
+        </Button>
       </FlexBetween>
     </WidgetWrapper>
   );
