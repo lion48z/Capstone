@@ -1,63 +1,34 @@
-
 import express from 'express';
-
 import http from 'http';
-
 import bodyParser from 'body-parser';
-
 import cookieParser from 'cookie-parser';
-
 import compression from 'compression';
-
 import cors from 'cors';
-
 import mongoose from 'mongoose'; //MongoDB
-
 import dotenv from 'dotenv';
-
 import multer from "multer"; //middleware for handling multipart/form-data.
-
 import helmet from "helmet"; //Helmet.js is an open source JavaScript library that helps you secure your Node.js application by setting several HTTP headers.
 
 import morgan from "morgan"; //HTTP request logger middleware for node.js
-
-
 
 import path from "path";
 
 import { fileURLToPath } from "url";
 
-
-
 import authRoutes from "./routes/authRoutes.js"
-
-import usersRoutes from "./routes/usersRoutes";
-
+import usersRoutes from "./routes/usersRoutes.js";
 import postsRoutes from "./routes/postsRoutes.js";
 
 import { register } from "./controllers/auth.js";
-
 import { createPost } from "./controllers/posts.js";
-
 import verifyToken from "./middleware/verifyToken.js";
 
-
-
 //import User from "./models/user";
-
 //import Post from "./models/post";
-
 //import { users, posts } from "./data/index";
 
 dotenv.config();
-
-
-
-
-
 const app = express();
-
-
 
 app.use(cors({
 
@@ -65,7 +36,7 @@ app.use(cors({
 
 }));
 
-app.use("/assets", express.static(path.join(__dirname, "public/assets")));
+//app.use("/assets", express.static(path.join(__dirname, "public/assets")));
 
 app.use(compression());
 
