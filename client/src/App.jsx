@@ -14,7 +14,7 @@ function App() {
   const isAuth = Boolean(useSelector((state) => state.token));
   console.log('Auth', isAuth)
   return (
-    <div className="app">
+    <div >
       <BrowserRouter>
         <ThemeProvider theme={theme}>
           <CssBaseline />

@@ -8,11 +8,8 @@ import mongoose from 'mongoose'; //MongoDB
 import dotenv from 'dotenv';
 import multer from "multer"; //middleware for handling multipart/form-data.
 import helmet from "helmet"; //Helmet.js is an open source JavaScript library that helps you secure your Node.js application by setting several HTTP headers.
-
 import morgan from "morgan"; //HTTP request logger middleware for node.js
-
 import path from "path";
-
 import { fileURLToPath } from "url";
 
 import authRoutes from "./routes/authRoutes.js"
@@ -22,48 +19,25 @@ import postsRoutes from "./routes/postsRoutes.js";
 import { register } from "./controllers/auth.js";
 import { createPost } from "./controllers/posts.js";
 import verifyToken from "./middleware/verifyToken.js";
-
+dotenv.config();
 //import User from "./models/user";
 //import Post from "./models/post";
 //import { users, posts } from "./data/index";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-dotenv.config();
+
 const app = express();
-
-app.use(cors({
-
-  credentials: true,
-
-}));
-
-app.use("assets", express.static(path.join(__dirname, "public/assets")));  
-
 app.use(compression());
-
 app.use(cookieParser());
-
 app.use(helmet());
-
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
-
 app.use(morgan("common"));
-
 app.use(bodyParser.json({ limit: "30mb"}));
-
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 
+app.use(cors());
 
-
-const PORT= process.env.PORT || 6001;
-
-const MONGO_USERNAME = process.env.MONGO_USERNAME || '';
-
-const MONGO_PASSWORD = process.env.MONGO_PASSWORD || '';
-
-const MONGO_URL = `mongodb+srv://${MONGO_USERNAME}:${MONGO_PASSWORD}@cluster0.5yfcerx.mongodb.net/?retryWrites=true&w=majority`
-
-//Multer for storage
+app.use("assets", express.static(path.join(__dirname, "./public/assets")));  
 
 const storage = multer.diskStorage({
 
@@ -80,8 +54,21 @@ const storage = multer.diskStorage({
   },
 
 });
-
+//Multer for storage
 const upload = multer({ storage });
+
+
+const PORT= process.env.PORT || 6001;
+
+const MONGO_USERNAME = process.env.MONGO_USERNAME || '';
+
+const MONGO_PASSWORD = process.env.MONGO_PASSWORD || '';
+
+const MONGO_URL = `mongodb+srv://${MONGO_USERNAME}:${MONGO_PASSWORD}@cluster0.5yfcerx.mongodb.net/?retryWrites=true&w=majority`
+
+
+
+
 
 
 

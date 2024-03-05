@@ -7,8 +7,7 @@ import FriendListWidget from "../widgets/FriendListWidget";
 import MyPostWidget from "../widgets/MyPostWidget";
 import PostsWidget from "../widgets/PostsWidget";
 import UserWidget from "../widgets/UserWidget";
-import { RootState } from "../app/store";
-import { User } from '../state/state'
+
 
 
 const ProfilePage = () => {
@@ -28,7 +27,7 @@ const ProfilePage = () => {
 
   useEffect(() => {
     getUser();
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []);
 
   if (!user) return null;
 

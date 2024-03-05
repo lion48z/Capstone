@@ -3,7 +3,6 @@ import { useTheme } from '@mui/material/styles'
 import Friend from '../components/Friend';
 import WidgetWrapper from "../components/WidgetWrapper";
 import { useEffect } from "react";
-import { RootState } from "../app/store"; 
 import { useDispatch, useSelector } from "react-redux";
 import { setFriends } from "../state/state";
 
@@ -28,12 +27,12 @@ const FriendListWidget = ({ userId }) => {
 
   useEffect(() => {
     getFriends();
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []); 
 
   return (
     <WidgetWrapper>
       <Typography
-        color={palette.neutral.dark}
+        color={palette.primary.light}
         variant="h5"
         fontWeight="500"
         sx={{ mb: "1.5rem" }}

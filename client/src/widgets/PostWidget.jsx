@@ -12,7 +12,7 @@ import Friend from "../components/Friend";
 import WidgetWrapper from "../components/WidgetWrapper";
 import { useDispatch, useSelector } from "react-redux";
 import { setPost } from "../state/state";
-import { RootState } from "../app/store"
+
 
 const PostWidget = ({
   postId,
@@ -34,8 +34,8 @@ const PostWidget = ({
   
 
   const { palette } = useTheme();
-  const main = palette.text.primary;
-  const primary = palette.text.primary;
+  const main = palette.primary.light;
+  const primary = palette.primary.main;
 
   const patchLike = async () => {
     const response = await fetch(`http://localhost:3001/posts/${postId}/like`, {
@@ -75,7 +75,7 @@ const PostWidget = ({
           <FlexBetween gap="0.3rem">
             <IconButton onClick={patchLike}>
               {isLiked ? (
-                <FavoriteOutlined sx={{ color: primary }} />
+                <FavoriteOutlined sx={{ color: main }} />
               ) : (
                 <FavoriteBorderOutlined />
               )}
