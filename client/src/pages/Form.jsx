@@ -12,8 +12,8 @@ import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setLogin } from "../state/state";
-import Dropzone, { IDropzoneProps, ILayoutProps } from 'react-dropzone-uploader'
-import FlexBetween from "../components/FlexBetween";
+import Dropzone from 'react-dropzone-uploader'
+
 
 const registerSchema = yup.object().shape({
   firstName: yup.string().required("required"),
