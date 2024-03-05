@@ -14,12 +14,13 @@ import {
   Divider,
   Typography,
   InputBase,
+  IconButton,
   Button,
   useMediaQuery,
 } from "@mui/material";
 import { useTheme } from '@mui/material/styles'
 import FlexBetween from "../components/FlexBetween";
-import Dropzone from 'react-dropzone-uploader'
+import Dropzone from 'react-dropzone'
 import UserImage from "../components/UserImage";
 import WidgetWrapper from "../components/WidgetWrapper";
 import { useDispatch, useSelector } from "react-redux";
@@ -81,17 +82,42 @@ const MyPostWidget = ({ picturePath }) => {
           mt="1rem"
           p="1rem"
         >
-             <Dropzone
-                    getUploadParams={({meta}) => ({ url: 'http://localhost:3001/posts' })}
-                    onChangeStatus={({ meta, file }, status) => {
-                      if (status === 'headers_received') {
-                        console.log(`${meta.name} uploaded!`);
-                        setImage('picture', file); // Update form field with uploaded file
-                      }
-                    }}
-                    inputContent="Drop files here"
-                    accept="image/*,audio/*,video/*"
-                  />
+            <Dropzone
+            
+            acceptedFiles=".jpg,.jpeg,.png"
+            multiple={false}
+            onDrop={(acceptedFiles) => setImage(acceptedFiles[0])}
+          >
+            {({ getRootProps, getInputProps }) => (
+              <FlexBetween>
+                <Box
+                  {...getRootProps()}
+                  border={`2px dashed ${palette.primary.main}`}
+                  p="1rem"
+                  width="100%"
+                  sx={{ "&:hover": { cursor: "pointer" } }}
+                >
+                  <input {...getInputProps()} />
+                  {!image ? (
+                    <p>Add Image Here</p>
+                  ) : (
+                    <FlexBetween>
+                      <Typography>{image.name}</Typography>
+                      <EditOutlined />
+                    </FlexBetween>
+                  )}
+                </Box>
+                {image && (
+                  <IconButton
+                    onClick={() => setImage(null)}
+                    sx={{ width: "15%" }}
+                  >
+                    <DeleteOutlined />
+                </IconButton>
+                )}
+              </FlexBetween>
+            )}
+          </Dropzone>
         </Box>
       )}
 

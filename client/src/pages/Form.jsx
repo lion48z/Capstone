@@ -1,8 +1,9 @@
 import { useState } from "react";
+
 import {
   Box,
   Button,
-  TextField,
+    TextField,
   useMediaQuery,
   Typography,  
 } from "@mui/material";
@@ -12,7 +13,8 @@ import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setLogin } from "../state/state";
-import Dropzone from 'react-dropzone-uploader'
+import FlexBetween from "../components/FlexBetween";
+import Dropzone from 'react-dropzone'
 
 
 const registerSchema = yup.object().shape({
@@ -37,7 +39,7 @@ const initialValuesRegister = {
   password: "",
   location: "",
   occupation: "",
-  picture: "",
+  picture: null,
 };
 
 const initialValuesLogin = {
@@ -105,7 +107,7 @@ const Form = () => {
     if (isLogin) await login(values, onSubmitProps);
     if (isRegister) await register(values, onSubmitProps);
   };
-
+ 
   return (
     <Formik
       onSubmit={handleFormSubmit}
@@ -179,21 +181,36 @@ const Form = () => {
                 />
                 <Box
                   gridColumn="span 4"
-                  border={`1px solid ${palette.neutral.medium}`}
+                  border={`1px solid ${palette.primary.main}`}
                   borderRadius="5px"
                   p="1rem"
                 >
-                  <Dropzone
-                    getUploadParams={() => ({ url: 'http://localhost:3001/auth/register' })}
-                    onChangeStatus={({ meta, file }, status) => {
-                      if (status === 'headers_received') {
-                        console.log(`${meta.name} uploaded!`);
-                        setFieldValue('picture', file); // Update form field with uploaded file
-                      }
-                    }}
-                    inputContent="Drop files here"
-                    accept="image/*"
-                  />
+                 <Dropzone
+                    acceptedFiles=".jpg,.jpeg,.png"
+                    multiple={false}
+                    onDrop={(acceptedFiles) =>
+                      setFieldValue("picture", acceptedFiles[0])
+                    }
+                  >
+                    {({ getRootProps, getInputProps }) => (
+                      <Box
+                        {...getRootProps()}
+                        border={`2px dashed ${palette.primary.main}`}
+                        p="1rem"
+                        sx={{ "&:hover": { cursor: "pointer" } }}
+                      >
+                        <input {...getInputProps()} />
+                        {!values.picture ? (
+                          <p>Add Picture Here</p>
+                        ) : (
+                          <FlexBetween>
+                            <Typography>{values.picture.name}</Typography>
+                          
+                          </FlexBetween>
+                        )}
+                      </Box>
+                    )}
+                  </Dropzone>
                 </Box>
               </>
             )}
@@ -221,7 +238,7 @@ const Form = () => {
             />
           </Box>
 
-         
+          {/* BUTTONS */}
           <Box>
             <Button
               fullWidth
@@ -229,8 +246,8 @@ const Form = () => {
               sx={{
                 m: "2rem 0",
                 p: "1rem",
-                backgroundColor: palette.primary.main,
-                color: palette.background.default,
+                backgroundColor: palette.primary.dark,
+                color: palette.background.light,
                 "&:hover": { color: palette.primary.main },
               }}
             >
@@ -243,7 +260,7 @@ const Form = () => {
               }}
               sx={{
                 textDecoration: "underline",
-                color: palette.primary.dark,
+                color: palette.primary.light,
                 "&:hover": {
                   cursor: "pointer",
                   color: palette.primary.light,

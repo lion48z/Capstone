@@ -93,10 +93,10 @@ app.use("/posts", postsRoutes);
 
 
 
-mongoose.connect(MONGO_URL)
+mongoose.connect(MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true })
 
   .then(() => {
-
+    console.log('Connected to MongoDB');
     app.listen(PORT, () => console.log(`Server Port: ${PORT}`));
 
    //User.insertMany(users); for one time load of data
