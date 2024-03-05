@@ -82,7 +82,7 @@ const MyPostWidget = ({ picturePath }) => {
           p="1rem"
         >
              <Dropzone
-                    getUploadParams={() => ({ url: 'http://localhost:3001/auth/register' })}
+                    getUploadParams={({meta}) => ({ url: 'http://localhost:3001/posts' })}
                     onChangeStatus={({ meta, file }, status) => {
                       if (status === 'headers_received') {
                         console.log(`${meta.name} uploaded!`);
@@ -90,7 +90,7 @@ const MyPostWidget = ({ picturePath }) => {
                       }
                     }}
                     inputContent="Drop files here"
-                    accept="image/*"
+                    accept="image/*,audio/*,video/*"
                   />
         </Box>
       )}

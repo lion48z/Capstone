@@ -1,8 +1,8 @@
 import Dropzone from 'react-dropzone-uploader';
 
 const MyUploader = () => {
-    
-    const getUploadParams = ({ meta }) => { return { url: 'http://localhost:3001/auth/register' } }
+    const BASE_URL ='http://localhost:3001/'
+    const getUploadParams = ({ meta }) => { return { url: `${BASE_URL}` } }  // do a base url for this 
     
     // called every time a file's `status` changes
     const handleChangeStatus = ({ meta, file }, status) => { console.log(status, meta, file) }
