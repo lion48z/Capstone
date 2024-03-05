@@ -12,7 +12,7 @@ import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setLogin } from "../state/state";
-import Dropzone from "react-dropzone";
+import Dropzone, { IDropzoneProps, ILayoutProps } from 'react-dropzone-uploader'
 import FlexBetween from "../components/FlexBetween";
 
 const registerSchema = yup.object().shape({
@@ -184,31 +184,16 @@ const Form = () => {
                   p="1rem"
                 >
                   <Dropzone
-                    acceptedFiles=".jpg,.jpeg,.png"
-                    multiple={false}
-                    onDrop={(acceptedFiles) =>
-                      setFieldValue("picture", acceptedFiles[0])
-                    }
-                  >
-                    {({ getRootProps, getInputProps }) => (
-                      <Box
-                        {...getRootProps()}
-                        border={`2px dashed ${palette.primary.main}`}
-                        p="1rem"
-                        sx={{ "&:hover": { cursor: "pointer" } }}
-                      >
-                        <input {...getInputProps()} />
-                        {!values.picture ? (
-                          <p>Add Picture Here</p>
-                        ) : (
-                          <FlexBetween>
-                            <Typography>{values.picture.name}</Typography>
-                           
-                          </FlexBetween>
-                        )}
-                      </Box>
-                    )}
-                  </Dropzone>
+                    getUploadParams={() => ({ url: 'http://localhost:3001/auth/register' })}
+                    onChangeStatus={({ meta, file }, status) => {
+                      if (status === 'headers_received') {
+                        console.log(`${meta.name} uploaded!`);
+                        setFieldValue('picture', file); // Update form field with uploaded file
+                      }
+                    }}
+                    inputContent="Drop files here"
+                    accept="image/*"
+                  />
                 </Box>
               </>
             )}
@@ -258,7 +243,7 @@ const Form = () => {
               }}
               sx={{
                 textDecoration: "underline",
-                color: palette.primary.main,
+                color: palette.primary.dark,
                 "&:hover": {
                   cursor: "pointer",
                   color: palette.primary.light,

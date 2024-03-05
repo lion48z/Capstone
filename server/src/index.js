@@ -26,7 +26,8 @@ import verifyToken from "./middleware/verifyToken.js";
 //import User from "./models/user";
 //import Post from "./models/post";
 //import { users, posts } from "./data/index";
-
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 dotenv.config();
 const app = express();
 
@@ -36,7 +37,7 @@ app.use(cors({
 
 }));
 
-//app.use("/assets", express.static(path.join(__dirname, "public/assets.cjs")));  this doesn't work
+app.use("assets", express.static(path.join(__dirname, "public/assets")));  
 
 app.use(compression());
 
@@ -89,11 +90,8 @@ app.post("/auth/register", upload.single("picture"), register);
 app.post("/posts", verifyToken, upload.single("picture"), createPost);
 
 
-
 app.use("/auth", authRoutes);
-
 app.use("/users", usersRoutes);
-
 app.use("/posts", postsRoutes);
 
 

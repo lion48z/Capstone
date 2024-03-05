@@ -1,5 +1,10 @@
 import React, { useState } from "react";
-
+import {
+  ChatBubbleOutlineOutlined,
+  FavoriteBorderOutlined,
+  FavoriteOutlined,
+  ShareOutlined,
+} from "@mui/icons-material";
 import { Box, Divider, IconButton, Typography} from "@mui/material";
 import { useTheme } from '@mui/material/styles'
 import FlexBetween from "../components/FlexBetween";
@@ -53,11 +58,9 @@ const PostWidget = ({
         subtitle={location}
         userPicturePath={userPicturePath}
       />
-      {description && (
-        <Typography color={main} sx={{ mt: "1rem" }}>
-          {description}
-        </Typography>
-      )}
+      <Typography color={main} sx={{ mt: "1rem" }}>
+        {description}
+      </Typography>
       {picturePath && (
         <img
           width="100%"
@@ -70,23 +73,31 @@ const PostWidget = ({
       <FlexBetween mt="0.25rem">
         <FlexBetween gap="1rem">
           <FlexBetween gap="0.3rem">
-            
+            <IconButton onClick={patchLike}>
+              {isLiked ? (
+                <FavoriteOutlined sx={{ color: primary }} />
+              ) : (
+                <FavoriteBorderOutlined />
+              )}
+            </IconButton>
             <Typography>{likeCount}</Typography>
           </FlexBetween>
 
           <FlexBetween gap="0.3rem">
-            
-              
-           
-            <Typography>{comments?.length}</Typography>
+            <IconButton onClick={() => setIsComments(!isComments)}>
+              <ChatBubbleOutlineOutlined />
+            </IconButton>
+            <Typography>{comments.length}</Typography>
           </FlexBetween>
         </FlexBetween>
 
-       
+        <IconButton>
+          <ShareOutlined />
+        </IconButton>
       </FlexBetween>
       {isComments && (
         <Box mt="0.5rem">
-          {comments?.map((comment, i) => (
+          {comments.map((comment, i) => (
             <Box key={`${name}-${i}`}>
               <Divider />
               <Typography sx={{ color: main, m: "0.5rem 0", pl: "1rem" }}>

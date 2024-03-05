@@ -1,4 +1,4 @@
-import { FC } from "react";
+
 import { PersonAddOutlined, PersonRemoveOutlined } from "@mui/icons-material";
 import { Box, IconButton, Typography } from "@mui/material";
 import { useTheme } from '@mui/material/styles'
@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { setFriends } from "../state/state";
 import FlexBetween from "./FlexBetween";
 import UserImage from "./UserImage";
-import { RootState } from "../app/store";
+
 
 
 const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
@@ -68,7 +68,16 @@ const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
           </Typography>
         </Box>
       </FlexBetween>
-      
+      <IconButton
+        onClick={() => patchFriend()}
+        sx={{ backgroundColor: primaryLight, p: "0.6rem" }}
+      >
+        {isFriend ? (
+          <PersonRemoveOutlined sx={{ color: primaryDark }} />
+        ) : (
+          <PersonAddOutlined sx={{ color: primaryDark }} />
+        )}
+      </IconButton>
     </FlexBetween>
   );
 };
