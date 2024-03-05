@@ -65,7 +65,7 @@ app.use(cors({
 
 }));
 
-//app.use("/assets", express.static(path.join(__dirname, "public/assets")));
+app.use("/assets", express.static(path.join(__dirname, "public/assets")));
 
 app.use(compression());
 
@@ -121,9 +121,9 @@ app.post("/posts", verifyToken, upload.single("picture"), createPost);
 
 app.use("/auth", authRoutes);
 
-app.use("/users", userRoutes);
+app.use("/users", usersRoutes);
 
-app.use("/posts", postRoutes);
+app.use("/posts", postsRoutes);
 
 
 
