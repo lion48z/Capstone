@@ -1,10 +1,5 @@
 import React, { useState } from "react";
-import {
-  
-  FavoriteBorderOutlined,
-  FavoriteOutlined,
-  
-} from "@mui/icons-material";
+
 import { Box, Divider, IconButton, Typography} from "@mui/material";
 import { useTheme } from '@mui/material/styles'
 import FlexBetween from "../components/FlexBetween";

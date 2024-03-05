@@ -9,10 +9,8 @@ import {
   Divider,
   Typography,
   InputBase,
- 
-  Button,
   IconButton,
-  useMediaQuery,
+   useMediaQuery,
 } from "@mui/material";
 import { useTheme } from '@mui/material/styles'
 import FlexBetween from "../components/FlexBetween";
@@ -152,7 +150,7 @@ const MyPostWidget = ({ picturePath }) => {
           </FlexBetween>
         )}
 
-        <Button
+        <IconButton
           disabled={!post}
           onClick={handlePost}
           sx={{
@@ -162,7 +160,7 @@ const MyPostWidget = ({ picturePath }) => {
           }}
         >
           POST
-        </Button>
+        </IconButton>
       </FlexBetween>
     </WidgetWrapper>
   );
