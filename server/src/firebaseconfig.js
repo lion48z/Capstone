@@ -1,4 +1,14 @@
 import admin from "firebase-admin";
+import { initializeApp } from "firebase/app";
+import { getStorage } from "firebase/storage";
+const firebaseConfig = {
+  apiKey: "key",
+  authDomain: "domain",
+  projectId: "projectId",
+  storageBucket: "myBucket",
+  messagingSenderId: "senderId",
+  appId: "appId"
+};
 
 // Firebase Initialization
 const serviceAccount = require("./path/to/serviceAccountKey.json");

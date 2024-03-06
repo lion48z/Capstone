@@ -11,7 +11,7 @@ import helmet from "helmet"; //Helmet.js is an open source JavaScript library th
 import morgan from "morgan"; //HTTP request logger middleware for node.js
 import path from "path";
 import { fileURLToPath } from "url";
-//import admin from "firebase-admin";
+
 
 import authRoutes from "./routes/authRoutes.js"
 import usersRoutes from "./routes/usersRoutes.js";
