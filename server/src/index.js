@@ -68,11 +68,6 @@ const MONGO_PASSWORD = process.env.MONGO_PASSWORD || '';
 const MONGO_URL = `mongodb+srv://${MONGO_USERNAME}:${MONGO_PASSWORD}@cluster0.5yfcerx.mongodb.net/?retryWrites=true&w=majority`
 
 
-
-
-
-
-
 app.post("/auth/register", upload.single("picture"), register);
 
 app.post("/posts", verifyToken, upload.single("picture"), createPost);
@@ -81,16 +76,6 @@ app.post("/posts", verifyToken, upload.single("picture"), createPost);
 app.use("/auth", authRoutes);
 app.use("/users", usersRoutes);
 app.use("/posts", postsRoutes);
-
-
-
-
-
-
-
-
-
-
 
 
 
