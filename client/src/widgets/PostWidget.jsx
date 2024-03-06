@@ -5,14 +5,13 @@ import {
   FavoriteOutlined,
   ShareOutlined,
 } from "@mui/icons-material";
-import { Box, Divider, IconButton, Typography} from "@mui/material";
+import { Box, Divider, IconButton, Input, Typography} from "@mui/material";
 import { useTheme } from '@mui/material/styles'
 import FlexBetween from "../components/FlexBetween";
 import Friend from "../components/Friend";
 import WidgetWrapper from "../components/WidgetWrapper";
 import { useDispatch, useSelector } from "react-redux";
 import { setPost } from "../state/state";
-
 
 const PostWidget = ({
   postId,
@@ -26,12 +25,14 @@ const PostWidget = ({
   comments,
 }) => {
   const [isComments, setIsComments] = useState(false);
+  const [newComment, setNewComment] = useState(""); // State for the new comment input
+  const [commentList, setCommentList] = useState(comments); // State for storing the list of comments
+
   const dispatch = useDispatch();
   const token = useSelector((state) => state.token);
   const loggedInUserId = useSelector((state) => state.user._id);
   const isLiked = Boolean(likes[loggedInUserId]);
   const likeCount = Object.keys(likes).length;
-  
 
   const { palette } = useTheme();
   const main = palette.primary.light;
@@ -48,6 +49,15 @@ const PostWidget = ({
     });
     const updatedPost = await response.json();
     dispatch(setPost({ post: updatedPost }));
+  };
+
+  // Function to handle adding a new comment
+  const handleAddComment = () => {
+    // Add the new comment to the list
+    const updatedCommentList = [...commentList, newComment];
+    setCommentList(updatedCommentList);
+    // Clear the comment input
+    setNewComment("");
   };
 
   return (
@@ -87,7 +97,7 @@ const PostWidget = ({
             <IconButton onClick={() => setIsComments(!isComments)}>
               <ChatBubbleOutlineOutlined />
             </IconButton>
-            <Typography>{comments.length}</Typography>
+            <Typography>{commentList.length}</Typography>
           </FlexBetween>
         </FlexBetween>
 
@@ -97,7 +107,8 @@ const PostWidget = ({
       </FlexBetween>
       {isComments && (
         <Box mt="0.5rem">
-          {comments.map((comment, i) => (
+          {/* Display existing comments */}
+          {commentList.map((comment, i) => (
             <Box key={`${name}-${i}`}>
               <Divider />
               <Typography sx={{ color: main, m: "0.5rem 0", pl: "1rem" }}>
@@ -105,7 +116,18 @@ const PostWidget = ({
               </Typography>
             </Box>
           ))}
+          {/* Input for new comment */}
           <Divider />
+          <Input
+            placeholder="Add a comment..."
+            
+            value={newComment}
+            onChange={(e) => setNewComment(e.target.value)}
+            onKeyUp={(e) => {
+              if (e.key === "Enter") handleAddComment();
+            }}
+            sx={{ mt: '0.5rem', color: primary}}
+          />
         </Box>
       )}
     </WidgetWrapper>
@@ -113,4 +135,5 @@ const PostWidget = ({
 };
 
 export default PostWidget;
+
 
