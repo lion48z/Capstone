@@ -1,5 +1,4 @@
 import { useState } from "react";
-
 import {
   Box,
   Button,
@@ -15,7 +14,6 @@ import { useDispatch } from "react-redux";
 import { setLogin } from "../state/state";
 import FlexBetween from "../components/FlexBetween";
 import Dropzone from 'react-dropzone'
-
 
 const registerSchema = yup.object().shape({
   firstName: yup.string().required("required"),
