@@ -10,7 +10,7 @@ import { setFriends } from "../state/state";
 const FriendListWidget = ({ userId }) => {
   const dispatch = useDispatch();
   const { palette } = useTheme();
-  const token = useSelector((state) => state.token);
+  const token = useSelector((state) => state.token);    //use redux to store token, user etc.
   const friends = useSelector((state) => state.user.friends);
 
   const getFriends = async () => {
